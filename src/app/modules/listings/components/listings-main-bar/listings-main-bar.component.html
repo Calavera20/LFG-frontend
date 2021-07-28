@@ -1,0 +1,46 @@
+<mat-card>
+  <mat-card-content>
+    <form>
+      <div class="row justify-content-center">
+        <div class="col-7">
+          <mat-form-field>
+            <input
+              matInput
+              [formControl]="search"
+              class="listing_search"
+              placeholder="Search description"
+              name="search"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-2">
+          <mat-form-field>
+            <input
+              matInput
+              [formControl]="search"
+              class="listing_search"
+              placeholder="Search description"
+              name="search"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-1">
+          <mat-card-actions>
+            <button mat-raised-button class="main-button">Filter</button>
+          </mat-card-actions>
+        </div>
+        <div class="col-2">
+          <mat-card-actions>
+            <button
+              mat-raised-button
+              (click)="open()"
+              class="main-button"
+            >
+              Create group
+            </button>
+          </mat-card-actions>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

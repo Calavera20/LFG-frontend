@@ -1,1 +1,58 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: "Anton";
+  src: local("Anton"),
+    url(./assets/fonts/Anton/Anton-Regular.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Assistant";
+  src: local("Assistant"),
+    url(./assets/fonts/Assistant/Assistant-VariableFont_wght.ttf)
+      format("truetype");
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  box-sizing: border-box;
+}
+* {
+  font-family: Assistant;
+}
+
+app-root {
+  display: block;
+  height: 100%;
+}
+
+body {
+  font-family: Assistant;
+  color: #c5c6c7;
+  background-image: url("./assets/svg/WorldMap.svg");
+  background-color: #0b0c10;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.main-button {
+  background-color: #66fcf1;
+  color: #0b0c10;
+}
+
+.app-footer {
+  position: relative;
+  bottom: 0;
+}

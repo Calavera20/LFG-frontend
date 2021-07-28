@@ -1,0 +1,9 @@
+.mat-card {
+  width: 100%;
+  height: 4em;
+  margin-bottom: 10px;
+}
+
+button {
+  bottom: 12px;
+}

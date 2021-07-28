@@ -1,0 +1,28 @@
+.mat-card {
+  margin: auto;
+  margin-bottom: 50px;
+  width: 200px;
+  height: 300px;
+  background-image: url("../../../../../../assets/images/lol.jpg");
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.1s;
+  padding: 1px;
+}
+
+.mat-card:hover {
+  transform: scale(1.05);
+}
+
+.mat-card-subtitle {
+  width: 200px;
+  position: absolute;
+  bottom: -1.5em;
+  color: #c5c6c7;
+  font-family: Assistant;
+  font-weight: bold;
+  font-size: large;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

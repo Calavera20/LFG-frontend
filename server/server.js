@@ -6,6 +6,11 @@ import {typeDefs as MutationDefs} from "./typeDefs/Mutation";
 import {resolvers as Mutation} from "./resolvers/Mutation";
 import {resolvers as Query} from "./resolvers/Query";
 import {connectDB, db} from "./dbConnector";
+import expressJwt from 'express-jwt';
+import permissions from './permissions/Permissions'
+import { applyMiddleware } from "graphql-middleware";
+import { buildFederatedSchema} from "@apollo/federation"
+import {gql } from "apollo-server-express";
 
 async function startApolloServer() {
     await connectDB();
@@ -34,8 +39,27 @@ async function startApolloServer() {
     Query
   };
 
-  const server = new ApolloServer({ typeDefs: [QueryDefs, MutationDefs, UserDefs], resolvers });
+  const typeDefs = gql(QueryDefs+MutationDefs+UserDefs);
+
+  const server = new ApolloServer({
+    schema: applyMiddleware(
+      buildFederatedSchema([{typeDefs, resolvers}]),
+      permissions
+    ),
+  context: ({req}) => {
+    const user = req.user || null;
+    return { user }
+  } });
   const app = express();
+
+  app.use(
+    expressJwt({
+      secret: "TODO",
+      algorithms: ["HS256"],
+      credentialsRequired: false
+    })
+  );
+
   await server.start();
   server.applyMiddleware({ app });
 

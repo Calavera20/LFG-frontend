@@ -1,26 +1,34 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Apollo, gql } from 'apollo-angular';
+import { of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+
+class Token{
+    token: string
+}
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
+  constructor(private http: HttpClient, private apollo: Apollo) {}
 
-    constructor(private http: HttpClient) {
+  login(username, password) {
+    this.apollo.mutate<any>({
+        mutation: gql`
+        mutation Login{
+            login(username: "${username}", password: "${password}")
+        }
+        `
+    }).subscribe(({data}) => {
+        localStorage.setItem("token",data.login);
+        console.log(data)
+    })
 
-    }
+  }
 
-
-    login(username, password) {
-        return this.http.post<any>(`/users/authenticate`, { username, password })
-            .pipe()
-              
-            };
-    
-
-    logout() {
-        
-        localStorage.removeItem('currentUser');
-        
-    }
+  logout() {
+    localStorage.removeItem('currentUser');
+  }
 }

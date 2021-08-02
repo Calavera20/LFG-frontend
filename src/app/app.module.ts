@@ -16,6 +16,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GroupModule } from './modules/group/group.module';
+import { APOLLO_OPTIONS } from 'apollo-angular';
+import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
+import { InMemoryCache } from '@apollo/client/core';
 
 @NgModule({
   declarations: [
@@ -37,8 +40,23 @@ import { GroupModule } from './modules/group/group.module';
     BrowserAnimationsModule,
     HttpClientModule,
     GroupModule,
+    HttpLinkModule,
+  
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APOLLO_OPTIONS,
+      useFactory: (httpLink: HttpLink) => {
+        return {
+          cache: new InMemoryCache(),
+          link: httpLink.create({
+            uri: 'http://localhost:4000/graphql',
+          }),
+        };
+      },
+      deps: [HttpLink],
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

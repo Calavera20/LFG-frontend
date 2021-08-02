@@ -2,6 +2,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "lib": ["esnext.asynciterable"],
     "outDir": "./out-tsc/spec",
     "types": [
       "jasmine"

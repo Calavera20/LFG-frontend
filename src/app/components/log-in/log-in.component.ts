@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 @Component({
   selector: 'app-log-in',
@@ -8,7 +9,8 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class LogInComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+    private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -27,7 +29,12 @@ export class LogInComponent implements OnInit {
 
   submit(){
     if(this.usernameFormControl.valid && this.passwordFormControl.valid){
-      this.authService.login(this.usernameFormControl.value, this.passwordFormControl.value);
+      this.authService.login(this.usernameFormControl.value, this.passwordFormControl.value).subscribe(res =>{
+        this.router.navigate(['dashboard'])
+      },
+      err =>{
+        console.log(err)
+      });
     }
   }
 }

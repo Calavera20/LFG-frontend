@@ -3,8 +3,10 @@ import express from "express";
 import {typeDefs as UserDefs} from "./typeDefs/User";
 import {typeDefs as QueryDefs} from "./typeDefs/Query";
 import {typeDefs as MutationDefs} from "./typeDefs/Mutation";
+import {typeDefs as GameCardDefs} from "./typeDefs/GameCard";
 import {resolvers as Mutation} from "./resolvers/Mutation";
 import {resolvers as Query} from "./resolvers/Query";
+import {resolvers as GameCard} from "./resolvers/Query";
 import {connectDB, db} from "./dbConnector";
 import expressJwt from 'express-jwt';
 import permissions from './permissions/Permissions'
@@ -36,10 +38,11 @@ async function startApolloServer() {
   // Provide resolver functions for your schema fields
   const resolvers = {
     Mutation,
-    Query
+    Query,
+    GameCard
   };
 
-  const typeDefs = gql(QueryDefs+MutationDefs+UserDefs);
+  const typeDefs = gql(QueryDefs+MutationDefs+UserDefs+GameCardDefs);
 
   const server = new ApolloServer({
     schema: applyMiddleware(

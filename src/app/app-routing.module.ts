@@ -7,6 +7,8 @@ import { GroupListingsComponent } from './modules/dashboard/components/group-lis
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { GroupComponent } from './modules/group/group.component';
 import { ListingsComponent } from './modules/listings/listings.component';
+import { AuthGuardService } from './services/authGuard/auth-guard.service';
+
 
 const routes: Routes = [
   {
@@ -16,6 +18,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate:[AuthGuardService]
   },
   {
     path: 'listings',
@@ -31,6 +34,7 @@ const routes: Routes = [
   {
     path: 'group',
     component: GroupComponent,
+    canActivate:[AuthGuardService]
   },
   {
     path: '**',

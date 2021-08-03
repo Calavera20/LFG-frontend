@@ -1,7 +1,8 @@
-<mat-card (click)="redirect()">
+<!-- <mat-card [ngStyle]="{'background-image': 'url(\'data:image/jpeg;base64,'+imageB64+')'}" (click)="redirect()"> -->
+    <mat-card [ngStyle]="{'background-image': 'url(' + imageB64 + ')'}" (click)="redirect()">
     <mat-card-content>
     <mat-card-subtitle>
-        Ligwa Legwend saaaaaaaaaaaaa
+        {{title}}
     </mat-card-subtitle>
 </mat-card-content>
 </mat-card> 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,15 +8,20 @@ import { Router } from '@angular/router';
 })
 export class GameCardComponent implements OnInit {
 
-  game: string = "lol";
+  @Input() title: string;
+
+  @Input() imageB64: string;
+
+  
 
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    console.log(this.title)
   }
 
   redirect(){
-    this.router.navigate(["listings"],{queryParams: {game: this.game}})
+    this.router.navigate(["listings"],{queryParams: {game: "lol"}})
     console.log("pa już lece")
   }
 

@@ -6,4 +6,12 @@ import { Injectable } from '@angular/core';
 export class ListingsService {
 
   constructor() { }
+
+  createNewListing(gameId: String, description: String, playerLimit: Number){
+
+  }
+
+  getAllListingsForGameId(gameId: String){
+
+  }
 }

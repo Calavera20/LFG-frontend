@@ -21,7 +21,7 @@ export class GameCardComponent implements OnInit {
   }
 
   redirect(){
-    this.router.navigate(["listings"],{queryParams: {game: "lol"}})
+    this.router.navigate(["listings"],{queryParams: {game: this.title}})
     console.log("pa już lece")
   }
 

@@ -7,6 +7,7 @@ import { ListingCardComponent } from './components/listing-card/listing-card.com
 import { ListContainerComponent } from './components/list-container/list-container.component';
 import { ListingsRoutingModule } from './listings-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { JoiningGroupComponent } from './components/joining-group/joining-group.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { SharedModule } from '../shared/shared.module';
     ListingCreatorComponent,
     ListingCardComponent,
     ListContainerComponent,
+    JoiningGroupComponent,
   ],
   imports: [CommonModule, ListingsRoutingModule, SharedModule],
 })

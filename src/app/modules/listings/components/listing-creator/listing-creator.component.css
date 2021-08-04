@@ -16,12 +16,11 @@
 
 button {
   width: 30%;
-
   font-family: Assistant;
   font-weight: bold;
 }
 .small-input {
-  width: 15em;
+  width: 10em;
 }
 .close {
   color: white;

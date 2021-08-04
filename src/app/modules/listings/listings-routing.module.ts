@@ -6,7 +6,7 @@ import { ListingsComponent } from './listings.component';
 const routes: Routes = [
   {
     path: '',
-    component: ListingsComponent,
+    component: ListContainerComponent,
 
     children: [
       {

@@ -41,7 +41,6 @@ import { InMemoryCache } from '@apollo/client/core';
     HttpClientModule,
     GroupModule,
     HttpLinkModule,
-  
   ],
   providers: [
     {

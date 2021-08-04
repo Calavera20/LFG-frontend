@@ -14,12 +14,13 @@ export class ListingsMainBarComponent implements OnInit {
   
   ngOnInit(): void {}
 
-  search = new FormControl('', [Validators.maxLength(40)]);
+  description = new FormControl('', [Validators.maxLength(40)]);
+  creator = new FormControl('', [Validators.maxLength(40)]);
 
   open() {
     const modalRef = this.modalService.open(ListingCreatorComponent,{
       centered: true, size: 'lg'
     });
-    modalRef.componentInstance.name = 'World';
+    modalRef.componentInstance.name = 'Creator';
   }
 }

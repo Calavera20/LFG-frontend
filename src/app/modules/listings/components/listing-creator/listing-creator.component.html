@@ -1,9 +1,14 @@
 <mat-card class="login">
   <mat-card-header>
     <h1>Stwórz grupę</h1>
-    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="activeModal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
   </mat-card-header>
   <mat-card-content>
     <form class="example-form">
@@ -13,6 +18,7 @@
             <mat-form-field class="example-full-width">
               <textarea
                 matInput
+                [formControl]="description"
                 class="description-textarea"
                 placeholder="Opis"
                 name="search"
@@ -24,7 +30,12 @@
         <tr>
           <td>
             <mat-form-field class="small-input">
-              <input matInput placeholder="Limit graczy" name="size-limit" />
+              <input
+                matInput
+                [formControl]="playerLimit"
+                placeholder="Limit graczy (1-10)"
+                name="size-limit"
+              />
             </mat-form-field>
           </td>
         </tr>
@@ -32,7 +43,7 @@
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button (click)="activeModal.close()" class="main-button">
+    <button mat-raised-button (click)="submit()" class="main-button">
       Stwórz
     </button>
   </mat-card-actions>

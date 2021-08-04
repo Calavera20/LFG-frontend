@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list-container',
@@ -6,7 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-container.component.css'],
 })
 export class ListContainerComponent implements OnInit {
-  constructor() {}
+  gameTitleParameter: String;
 
-  ngOnInit(): void {}
+  constructor(private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.gameTitleParameter = params['game'];
+    })
+  }
+
+  ngOnInit(): void {
+    console.log(this.gameTitleParameter)
+  }
 }

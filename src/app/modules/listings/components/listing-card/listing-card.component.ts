@@ -11,7 +11,8 @@ export class ListingCardComponent implements OnInit {
   //TODO socket integration
 
   @Input()
-  groupId: string;
+  cardData: any;
+
 
   isWaiting: boolean;
 
@@ -25,7 +26,7 @@ export class ListingCardComponent implements OnInit {
 
 
   onClick(){
-    this.router.navigate(['group'])
+    this.router.navigate(['group'],{queryParams: {groupId: "id"}})
   }
 
   private sendJoinRequest(){

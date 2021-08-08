@@ -4,9 +4,9 @@ import {typeDefs as UserDefs} from "./typeDefs/User";
 import {typeDefs as QueryDefs} from "./typeDefs/Query";
 import {typeDefs as MutationDefs} from "./typeDefs/Mutation";
 import {typeDefs as GameCardDefs} from "./typeDefs/GameCard";
+import {typeDefs as GroupDefs} from "./typeDefs/Group"
 import {resolvers as Mutation} from "./resolvers/Mutation";
 import {resolvers as Query} from "./resolvers/Query";
-import {resolvers as GameCard} from "./resolvers/Query";
 import {connectDB, db} from "./dbConnector";
 import expressJwt from 'express-jwt';
 import permissions from './permissions/Permissions'
@@ -20,34 +20,18 @@ async function startApolloServer() {
     db.on('error', () => {
         console.error("Error while connecting to DB");
     });
-  // Construct a schema, using GraphQL schema language
-//   const typeDefs = gql`
 
-//     type Message{
-//         user: User!
-//         content: String!
-//     }
-
-//     type Chat {
-//         id: ID!
-//         messages: [String!]
-//         members: [User!]!
-//         owner: User!
-//     }
-
-  // Provide resolver functions for your schema fields
   const resolvers = {
     Mutation,
-    Query,
-    GameCard
+    Query
   };
 
-  const typeDefs = gql(QueryDefs+MutationDefs+UserDefs+GameCardDefs);
+  const typeDefs = gql(QueryDefs+MutationDefs+UserDefs+GameCardDefs+GroupDefs);
 
   const server = new ApolloServer({
     schema: applyMiddleware(
       buildFederatedSchema([{typeDefs, resolvers}]),
-      permissions
+     // permissions
     ),
   context: ({req}) => {
     const user = req.user || null;

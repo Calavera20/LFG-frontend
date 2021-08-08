@@ -1,6 +1,8 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { UserModel as User } from "../schemas/User";
+
+import { GroupModel as Group } from "../schemas/Group";
 import { db } from "../dbConnector";
 import { UserInputError } from "apollo-server-express";
 import AuthPayload from "../classes/authPayload";
@@ -56,4 +58,27 @@ export const resolvers = {
       return new UserInputError("username not found");
     }
   },
+  createGroup: async (parent, { description, creator, playerLimit, gameId }) => {
+    let res, err;
+    //todo tworzenie nowego chatu po stronie mongo i połączenie id
+    let creationDate= Date.now().toString();
+    await new Group({ description: description, creator: creator, playerLimit: playerLimit, gameId: gameId, members: [creator], isOpen: true, currentSize: 1, creationDate:creationDate}).save().then(
+      (newGroup) => {
+        console.log(newGroup)
+        res = newGroup.id;
+      },
+      (err) => {
+        err = err;
+        console.log(err)
+        res = err.code;
+      }
+    );
+
+    if (err) {
+      return new UserInputError(res)
+    } else {
+      return res
+    }
+
+  }
 };

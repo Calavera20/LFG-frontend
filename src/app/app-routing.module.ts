@@ -3,14 +3,17 @@ import { Routes, RouterModule } from '@angular/router';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { SignupComponent } from './components/signup/signup.component';
-import { GroupListingsComponent } from './modules/dashboard/components/group-listings/group-listings.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { GroupComponent } from './modules/group/group.component';
-import { ListingsComponent } from './modules/listings/listings.component';
 import { AuthGuardService } from './services/authGuard/auth-guard.service';
 
 
 const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'dashboard',
+    pathMatch: 'full'
+  },
   {
     path: 'login',
     component: LogInComponent,
@@ -18,7 +21,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    canActivate:[AuthGuardService]
+    canActivate: [AuthGuardService]
   },
   {
     path: 'listings',
@@ -34,7 +37,7 @@ const routes: Routes = [
   {
     path: 'group',
     component: GroupComponent,
-    canActivate:[AuthGuardService]
+    canActivate: [AuthGuardService],
   },
   {
     path: '**',
@@ -46,4 +49,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

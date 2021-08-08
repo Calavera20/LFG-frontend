@@ -4,5 +4,6 @@ export const typeDefs = `
   type Query {
     hello: String
     getGameCards: [GameCard]
+    getGroupsForGameId(gameId: String): [Group]
   }
 `;

@@ -11,7 +11,7 @@ export class ListingCardComponent implements OnInit {
   //TODO socket integration
 
   @Input()
-  cardData: any;
+  groupData: any;
 
 
   isWaiting: boolean;
@@ -22,7 +22,9 @@ export class ListingCardComponent implements OnInit {
 
   constructor(private router:Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.groupData)
+  }
 
 
   onClick(){

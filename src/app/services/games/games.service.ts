@@ -15,6 +15,7 @@ export class GamesService {
         mutation: gql`
           query {
             getGameCards {
+              id
               imageB64
               title
             }

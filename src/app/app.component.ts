@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Apollo } from 'apollo-angular';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +8,12 @@ import { Apollo } from 'apollo-angular';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+
+  @HostListener("window:onbeforeunload",["$event"])
+  clearLocalStorage(event){
+      localStorage.clear();
+  }
+
   title = 'working-title-LFG';
   constructor(
     private matIconRegistry: MatIconRegistry,

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ListingsService } from '../../services/listings.service';
+import { ListingsService } from 'src/app/services/listings/listings.service';
 
 @Component({
   selector: 'app-listing-creator',
@@ -24,7 +24,7 @@ export class ListingCreatorComponent implements OnInit {
   }
 
   submit(){
-    //this.listingsService.createNewListing();
+    //this.listingsService.createGroup();
   }
 
 }

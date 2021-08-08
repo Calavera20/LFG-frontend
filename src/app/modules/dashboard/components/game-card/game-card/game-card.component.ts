@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 })
 export class GameCardComponent implements OnInit {
 
+  @Input() gameId: string;
+
   @Input() title: string;
 
   @Input() imageB64: string;
@@ -17,11 +19,11 @@ export class GameCardComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    console.log(this.title)
+    console.log(this.gameId)
   }
 
   redirect(){
-    this.router.navigate(["listings"],{queryParams: {game: this.title}})
+    this.router.navigate(["listings"],{queryParams: {id: this.gameId, title: this.title}})
     console.log("pa już lece")
   }
 

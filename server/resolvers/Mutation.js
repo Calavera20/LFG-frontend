@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import { UserModel as User } from "../schemas/User";
 
 import { GroupModel as Group } from "../schemas/Group";
+import {ChatModel as Chat } from "../schemas/Chat"
 import { db } from "../dbConnector";
 import { UserInputError } from "apollo-server-express";
 import AuthPayload from "../classes/authPayload";
@@ -63,9 +64,10 @@ export const resolvers = {
     //todo tworzenie nowego chatu po stronie mongo i połączenie id
     let creationDate= Date.now().toString();
     await new Group({ description: description, creator: creator, playerLimit: playerLimit, gameId: gameId, members: [creator], isOpen: true, currentSize: 1, creationDate:creationDate}).save().then(
-      (newGroup) => {
+      async (newGroup) => {
         console.log(newGroup)
         res = newGroup.id;
+        await new Chat({groupId: res}).save();
       },
       (err) => {
         err = err;

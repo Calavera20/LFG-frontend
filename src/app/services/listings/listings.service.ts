@@ -12,8 +12,8 @@ export class ListingsService {
 
   getGroupsForGameId(gameId: String) {
     return this.apollo
-      .mutate<any>({
-        mutation: gql`
+      .query<any>({
+        query: gql`
           query {
             getGroupsForGameId(gameId:"${gameId}") {
               id
@@ -36,7 +36,19 @@ export class ListingsService {
       );
   }
 
-  createGroup(description: String, Creator: String, playerLimit: String, creationTime: String){
-
+  createGroup(description: String, creator: String, playerLimit: String, gameId: String){
+    return this.apollo
+      .mutate<any>({
+        mutation: gql`
+          mutation {
+            createGroup(description:"${description}", creator: "${creator}", playerLimit: "${playerLimit}", gameId: "${gameId}") 
+          }
+        `,
+      })
+      .pipe(
+        map((res) => {
+          return res.data.createGroup;
+        })
+      );
   }
 }

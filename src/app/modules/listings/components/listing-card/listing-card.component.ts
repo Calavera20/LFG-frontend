@@ -20,10 +20,18 @@ export class ListingCardComponent implements OnInit {
 
   isAccepted: boolean;
 
+  elapsedTime: number;
+
   constructor(private router:Router) {}
 
   ngOnInit(): void {
     console.log(this.groupData)
+    this.calculateElapsedTime(this.groupData.creationDate)
+  }
+
+  calculateElapsedTime(time: number){
+    let timeDiff = Date.now() - time;
+    this.elapsedTime = Math.trunc(timeDiff/60000);
   }
 
 

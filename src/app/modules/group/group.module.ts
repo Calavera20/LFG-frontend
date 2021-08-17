@@ -5,6 +5,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ChatComponent } from './components/chat/chat.component';
 import { MembersListComponent } from './components/members-list/members-list.component';
 import { MemberCardComponent } from './components/member-card/member-card.component';
+import { MessageComponent } from './components/message/message/message.component';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { MemberCardComponent } from './components/member-card/member-card.compon
     ChatComponent,
     MembersListComponent,
     MemberCardComponent,
+    MessageComponent,
   ],
   imports: [CommonModule, SharedModule],
 })

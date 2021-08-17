@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LogInComponent } from './components/log-in/log-in.component';
@@ -14,11 +13,12 @@ import { ListingsModule } from './modules/listings/listings.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { NotificationsComponent } from './components/notifications/notifications.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GroupModule } from './modules/group/group.module';
 import { APOLLO_OPTIONS } from 'apollo-angular';
-import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
-import { InMemoryCache } from '@apollo/client/core';
+import { ApolloClientOptions, InMemoryCache, split } from '@apollo/client/core';
+import {WebSocketLink} from '@apollo/client/link/ws'
+import { getMainDefinition } from '@apollo/client/utilities';
+import {HttpLink} from 'apollo-angular/http'
 
 @NgModule({
   declarations: [
@@ -40,17 +40,41 @@ import { InMemoryCache } from '@apollo/client/core';
     BrowserAnimationsModule,
     HttpClientModule,
     GroupModule,
-    HttpLinkModule,
   ],
   providers: [
     {
       provide: APOLLO_OPTIONS,
-      useFactory: (httpLink: HttpLink) => {
+      useFactory(httpLink: HttpLink): ApolloClientOptions<any> {
+        // Create an http link:
+        const http = httpLink.create({
+          uri: 'http://localhost:4000/graphql',
+        });
+
+        // Create a WebSocket link:
+        const ws = new WebSocketLink({
+          uri: 'ws://localhost:4000/graphql',
+          options: {
+            reconnect: true,
+          },
+        });
+
+        // using the ability to split links, you can send data to each link
+        // depending on what kind of operation is being sent
+        const link = split(
+          // split based on operation type
+          ({query}) => {
+            const data = getMainDefinition(query);
+            return (
+              data.kind === 'OperationDefinition' && data.operation === 'subscription'
+            );
+          },
+          ws,
+          http,
+        );
+
         return {
-          cache: new InMemoryCache(),
-          link: httpLink.create({
-            uri: 'http://localhost:4000/graphql',
-          }),
+          link: link,
+          cache: new InMemoryCache()
         };
       },
       deps: [HttpLink],

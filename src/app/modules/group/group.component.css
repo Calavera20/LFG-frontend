@@ -1,0 +1,10 @@
+.group-card {
+  max-height: 80vh;
+}
+
+.group-card .row {
+  height: 100%;
+}
+mat-card-content {
+  height: 100%;
+}

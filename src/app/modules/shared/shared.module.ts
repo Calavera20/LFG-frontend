@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [],
@@ -26,6 +27,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatDividerModule,
     MatSelectModule,
     MatDialogModule,
+    NgxSpinnerModule
   ],
   exports: [
     CommonModule,
@@ -40,6 +42,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatIconModule,
     MatButtonModule,
     MatDividerModule,
+    
+    NgxSpinnerModule
   ],
 })
 export class SharedModule {}

@@ -5,6 +5,7 @@ import { typeDefs as QueryDefs } from "./typeDefs/Query";
 import { typeDefs as MutationDefs } from "./typeDefs/Mutation";
 import { typeDefs as GameCardDefs } from "./typeDefs/GameCard";
 import { typeDefs as GroupDefs } from "./typeDefs/Group";
+import { typeDefs as FriendsListDefs } from "./typeDefs/FriendsList";
 import { resolvers as Mutation } from "./resolvers/Mutation";
 import { resolvers as Query } from "./resolvers/Query";
 import { connectDB, db } from "./dbConnector";
@@ -31,7 +32,7 @@ async function startApolloServer() {
   };
 
   const typeDefs = gql(
-    QueryDefs + MutationDefs + UserDefs + GameCardDefs + GroupDefs
+    QueryDefs + MutationDefs + UserDefs + GameCardDefs + GroupDefs + FriendsListDefs
   );
 
   const server = new ApolloServer({

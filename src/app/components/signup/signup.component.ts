@@ -43,6 +43,7 @@ export class SignupComponent implements OnInit {
   signupForm = this.formBuilder.group(
     {
       usernameFormControl: new FormControl('', [Validators.required]),
+      emailFormControl: new FormControl('', [Validators.required, Validators.email]),
       passwordFormControl: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
@@ -67,6 +68,7 @@ export class SignupComponent implements OnInit {
       this.authService
         .signup(
           this.signupForm.controls.usernameFormControl.value,
+          this.signupForm.controls.emailFormControl.value,
           this.signupForm.controls.passwordFormControl.value
         )
         .subscribe(

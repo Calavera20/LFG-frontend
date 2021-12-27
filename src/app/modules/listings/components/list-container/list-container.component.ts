@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import Group from 'src/app/models/group.model';
 import { ListingsService } from 'src/app/services/listings/listings.service';
 
@@ -16,7 +17,8 @@ export class ListContainerComponent implements OnInit {
   groups: Group[];
 
   constructor(private activatedRoute: ActivatedRoute,
-    private listingsService: ListingsService) {
+    private listingsService: ListingsService,
+    private spinner: NgxSpinnerService) {
     this.activatedRoute.queryParams.subscribe(params => {
       this.gameTitleParameter = params['title'];
       this.gameIdParameter = params['id']
@@ -26,13 +28,22 @@ export class ListContainerComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.gameTitleParameter)
     console.log(this.gameIdParameter)
+
+    this.loadGroups();
+  }
+
+  loadGroups(): void{
     this.listingsService.getGroupsForGameId(this.gameIdParameter).subscribe(
       (data) => {
         console.log(data)
-        this.groups=data
+        this.groups=data;
+        
+      this.spinner.hide();
       },
       (err) => {
         console.log(err)
+        
+      this.spinner.hide();
       }
     );
   }

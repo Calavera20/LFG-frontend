@@ -25,6 +25,33 @@
                 value=""
               ></textarea>
             </mat-form-field>
+            <mat-error
+                    *ngIf="
+                      description.hasError(
+                        'required'
+                      ) && description.touched
+                    "
+                  >
+                    Description is <strong>required</strong>
+                  </mat-error>
+                  <mat-error
+                    *ngIf="
+                      description.hasError(
+                        'minlength'
+                      ) && description.touched
+                    "
+                  >
+                    At least <strong>8 characters required</strong>
+                  </mat-error>
+                  <mat-error
+                    *ngIf="
+                      description.hasError(
+                        'maxlength'
+                      ) && description.touched
+                    "
+                  >
+                    Description is <strong>too long</strong>
+                  </mat-error>
           </td>
         </tr>
         <tr>
@@ -37,6 +64,42 @@
                 name="size-limit"
               />
             </mat-form-field>
+            <mat-error
+            *ngIf="
+              playerLimit.hasError(
+                'required'
+              ) && playerLimit.touched
+            "
+          >
+            Limit is <strong>required</strong>
+          </mat-error>
+          <mat-error
+            *ngIf="
+            playerLimit.hasError(
+                'min'
+              ) && playerLimit.touched
+            "
+          >
+            At least <strong>1 player limit</strong>
+          </mat-error>
+          <mat-error
+            *ngIf="
+            playerLimit.hasError(
+                'max'
+              ) && playerLimit.touched
+            "
+          >
+            No more than <strong>10 players</strong>
+          </mat-error>
+          <mat-error
+            *ngIf="
+            playerLimit.hasError(
+                'pattern'
+              ) && playerLimit.touched
+            "
+          >
+            Only <strong>numbers</strong> are allowed
+          </mat-error>
           </td>
         </tr>
       </table>

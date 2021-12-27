@@ -18,7 +18,7 @@ export const resolvers = {
   getGroupsForGameId: async (parent, { gameId }) => {
     let res;
     console.log(gameId);
-    await Group.find({gameId: gameId}).then(
+    await Group.find({gameId: gameId}).sort({ creationDate: -1 }).then(
       (data) => {
         res = data;
         

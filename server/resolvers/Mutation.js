@@ -10,10 +10,10 @@ import AuthPayload from "../classes/authPayload";
 import UserClass from "../classes/user";
 
 export const resolvers = {
-  signup: async (parent, { username, password }) => {
+  signup: async (parent, { username, email, password }) => {
     const hash = await bcrypt.hash(password, 10);
     let res;
-    await new User({ username: username, password: hash }).save().then(
+    await new User({ username: username, email: email, password: hash }).save().then(
       () => {
         console.log(username)
         res = username;

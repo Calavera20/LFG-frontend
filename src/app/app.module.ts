@@ -19,6 +19,8 @@ import { ApolloClientOptions, InMemoryCache, split } from '@apollo/client/core';
 import {WebSocketLink} from '@apollo/client/link/ws'
 import { getMainDefinition } from '@apollo/client/utilities';
 import {HttpLink} from 'apollo-angular/http'
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -39,8 +41,9 @@ import {HttpLink} from 'apollo-angular/http'
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    GroupModule,
+    GroupModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     {
       provide: APOLLO_OPTIONS,

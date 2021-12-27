@@ -38,6 +38,39 @@
                 <td>
                   <mat-form-field class="example-full-width">
                     <input
+                      matInput
+                      class="email_input"
+                      placeholder="Email"
+                      name="email"
+                      required
+                      formControlName="emailFormControl"
+                    />
+                  </mat-form-field>
+                  <mat-error
+                    *ngIf="
+                      signupForm.controls.emailFormControl.hasError(
+                        'required'
+                      ) && signupForm.controls.emailFormControl.touched
+                    "
+                  >
+                    Email is <strong>required</strong>
+                  </mat-error>
+                  <mat-error
+                  *ngIf="
+                    signupForm.controls.emailFormControl.hasError(
+                      'email'
+                    ) && signupForm.controls.emailFormControl.touched
+                  "
+                >
+                  Wrong format
+                </mat-error>
+                </td>
+              </tr>
+              <tr></tr>
+              <tr>
+                <td>
+                  <mat-form-field class="example-full-width">
+                    <input
                       type="password"
                       matInput
                       placeholder="Password"

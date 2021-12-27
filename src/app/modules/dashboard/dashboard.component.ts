@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import GameCard from 'src/app/models/gameCard.model';
 import { GamesService } from 'src/app/services/games/games.service';
 
@@ -8,7 +9,8 @@ import { GamesService } from 'src/app/services/games/games.service';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  constructor(private gamesService: GamesService) {}
+  constructor(private gamesService: GamesService,
+    private spinner: NgxSpinnerService) {}
 
   gameCards: GameCard[];
 
@@ -16,10 +18,12 @@ export class DashboardComponent implements OnInit {
     this.gamesService.getAllGameCards().subscribe(
       (data) => {
         console.log(data)
-        this.gameCards=data
+        this.gameCards=data;
+        this.spinner.hide();
       },
       (err) => {
         console.log(err)
+        this.spinner.hide();
       }
     );
   }

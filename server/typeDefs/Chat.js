@@ -9,5 +9,6 @@ export const typeDefs = gql`
     type User {
         id: ID!
         username: String!
+        friendsList: FriendsList
     }
 `;

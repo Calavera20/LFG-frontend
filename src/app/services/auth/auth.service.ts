@@ -42,12 +42,12 @@ export class AuthService {
       );
   }
 
-  signup(username, password) {
+  signup(username, email, password) {
     return this.apollo
       .mutate<any>({
         mutation: gql`
         mutation Signup{
-            signup(username: "${username}", password: "${password}")
+            signup(username: "${username}", email: "${email}" password: "${password}")
         }
         `,
       })

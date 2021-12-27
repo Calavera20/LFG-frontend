@@ -4,6 +4,7 @@ import { LogInComponent } from './components/log-in/log-in.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
+import { FriendsManagerComponent } from './modules/friends-manager/friends-manager.component';
 import { GroupComponent } from './modules/group/group.component';
 import { AuthGuardService } from './services/authGuard/auth-guard.service';
 
@@ -37,6 +38,11 @@ const routes: Routes = [
   {
     path: 'group',
     component: GroupComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'friends-manager',
+    component: FriendsManagerComponent,
     canActivate: [AuthGuardService],
   },
   {

@@ -15,7 +15,7 @@ export class ListingsMainBarComponent implements OnInit {
   ngOnInit(): void {}
 
   description = new FormControl('', [Validators.maxLength(40)]);
-  creator = new FormControl('', [Validators.maxLength(40)]);
+  // creator = new FormControl('', [Validators.maxLength(40)]);
 
   open() {
     const modalRef = this.modalService.open(ListingCreatorComponent,{

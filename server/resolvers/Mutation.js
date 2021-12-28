@@ -4,26 +4,30 @@ import { UserModel as User } from "../schemas/User";
 
 import { GroupModel as Group } from "../schemas/Group";
 import {ChatModel as Chat } from "../schemas/Chat"
-import { db } from "../dbConnector";
 import { UserInputError } from "apollo-server-express";
 import AuthPayload from "../classes/authPayload";
-import UserClass from "../classes/user";
+import { FriendsListModel as FriendsList } from "../schemas/FriendsList";
 
 export const resolvers = {
   signup: async (parent, { username, email, password }) => {
     const hash = await bcrypt.hash(password, 10);
     let res;
     await new User({ username: username, email: email, password: hash }).save().then(
-      () => {
+      async (user) => {
         console.log(username)
         res = username;
+        await new FriendsList({userId: user.id}).save().then(()=>{},
+        (err)=>{
+          res = err.code;
+        })
       },
       (err) => {
         console.log(err)
         res = err.code;
       }
     );
-
+//dodaj friendsliste
+//dodaj sprawdzanie emaila
     if (res == username) {
       return res;
     } else {
@@ -38,6 +42,7 @@ export const resolvers = {
         console.log(match);
         console.log(user.password)
         if (match) {
+          //dokończenie jwt
           res = new AuthPayload(
             jwt.sign({ "http://localhost:4200/": { user } }, "TODO", {
               algorithm: "HS256",
@@ -82,5 +87,26 @@ export const resolvers = {
       return res
     }
 
+  },
+  friendInvite: async  (parent, { userData, inviteeData}) =>{
+    //wsadz usera do pending invitee
+    //wsadz invitee do invited usera
+    console.log(userData)
+    await FriendsList.updateOne({userId: userData.id}, {$push: {invited: inviteeData}}).then(
+      async () => {
+        await FriendsList.updateOne({userId: inviteeData.id}, {$push: {pending: userData}})
+      }
+    );
+
+  },
+  friendAccept: async  (parent, { userData, inviteeData }) =>{
+    //wsadz invitee do friends usera i na odwrót
+  },
+  friendDecline: async  (parent, { userData, inviteeData }) =>{
+    //czy robić?
+  },
+  emailInvite: async (parent,  { userData, inviteeData }) =>{
+    //nodemailer 
+    //wyślij zapro na maila w danych invitee że user go zaprasza
   }
 };

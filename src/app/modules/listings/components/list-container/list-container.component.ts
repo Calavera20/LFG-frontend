@@ -32,12 +32,15 @@ export class ListContainerComponent implements OnInit {
     this.loadGroups();
   }
 
-  loadGroups(): void{
+  loadGroups(description?: string): void{
     this.listingsService.getGroupsForGameId(this.gameIdParameter).subscribe(
       (data) => {
+        if(description){
         console.log(data)
-        this.groups=data;
-        
+        this.groups=data.filter(group => group.description.includes(description));
+        }else{
+          this.groups=data;
+        }
       this.spinner.hide();
       },
       (err) => {
@@ -46,5 +49,9 @@ export class ListContainerComponent implements OnInit {
       this.spinner.hide();
       }
     );
+  }
+
+  filter(description: string) {
+    this.loadGroups(description);
   }
 }

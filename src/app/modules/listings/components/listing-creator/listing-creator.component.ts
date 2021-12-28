@@ -59,7 +59,7 @@ export class ListingCreatorComponent {
   }
   reloadCurrentRoute() {
       this.spinner.show();
-      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      this.router.routeReuseStrategy.shouldReuseRoute = () => true;
       this.router.onSameUrlNavigation = 'reload';
       this.router.navigate(['listings'],{queryParams: {id: this.gameIdParameter, title: this.gameTitleParameter}})
 }

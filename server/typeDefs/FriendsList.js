@@ -8,5 +8,12 @@ export const typeDefs = `
     type Friend{
         id: String!
         username: String!
+        email: String!
+    }
+
+    input InputFriend{
+        id: String!
+        username: String!
+        email: String!
     }
 `;

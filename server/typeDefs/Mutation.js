@@ -7,5 +7,6 @@ export const typeDefs = `
     signup(username: String!, email: String!, password: String!): String
     createGroup(description: String!, creator: String!, playerLimit: String!, gameId: String!): String
     sendMessage(content: String!, creator: String!, creationDate: String!): String
+    friendInvite(userData: InputFriend, inviteeData: InputFriend): String
   }
 `;

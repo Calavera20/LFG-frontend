@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -11,6 +11,9 @@ import { ListingCreatorComponent } from '../listing-creator/listing-creator.comp
 })
 export class ListingsMainBarComponent implements OnInit {
   constructor(private modalService: NgbModal) {}
+
+  @Output() 
+  filterEvent = new EventEmitter<string>();
   
   ngOnInit(): void {}
 
@@ -22,5 +25,12 @@ export class ListingsMainBarComponent implements OnInit {
       centered: true, size: 'lg'
     });
     modalRef.componentInstance.name = 'Creator';
+  }
+
+  filter(){
+    let value = this.description.value;
+    console.log(value)
+    this.filterEvent.emit(value);
+    
   }
 }

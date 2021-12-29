@@ -42,10 +42,9 @@ export const resolvers = {
     );
     return res;
   },
-  getUserData: async (parent, { userId }) => {
+  getUserData: async (parent, { username }) => {
     let res;
-    console.log(userId)
-    await User.findOne({_id: userId}).then(
+    await User.findOne({username: username}).then(
       (data) => {
         res = data;
         console.log(data)

@@ -8,5 +8,7 @@ export const typeDefs = `
     createGroup(description: String!, creator: String!, playerLimit: String!, gameId: String!): String
     sendMessage(content: String!, creator: String!, creationDate: String!): String
     friendInvite(userData: InputFriend, inviteeData: InputFriend): String
+    acceptFriendInvite(userData: InputFriend, inviteeData: InputFriend): String
+    emailInvite(userData: InputFriend, inviteeData: InputFriend): String
   }
 `;

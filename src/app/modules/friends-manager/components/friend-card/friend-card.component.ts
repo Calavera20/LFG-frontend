@@ -10,6 +10,9 @@ import { UserService } from 'src/app/services/user/user.service';
 export class FriendCardComponent implements OnInit {
 
   @Input()
+  buttonType: any;
+
+  @Input()
   friendData: any;
   constructor( private userService: UserService) { }
 
@@ -19,7 +22,32 @@ export class FriendCardComponent implements OnInit {
 
   invite(){
     //this.spinner.show();
-    this.userService.inviteFriend(this.friendData)
+    // this.userService.inviteFriend(this.friendData).subscribe(
+    //   (data) => {
+    //     console.log(data)
+
+    //   },
+    //   (err) => {
+    //     console.log(err)
+    //   }
+    // );
   }
+
+  accept(){
+    //this.spinner.show();
+    this.userService.acceptFriendInvite(this.friendData).subscribe(
+      (data) => {
+        console.log(data)
+
+      },
+      (err) => {
+        console.log(err)
+      }
+    );
+
+ 
+  }
+
+
 
 }

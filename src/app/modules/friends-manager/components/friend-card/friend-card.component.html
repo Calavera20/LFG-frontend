@@ -4,11 +4,13 @@
             <div class="col-10">
               {{friendData.username}}
             </div> 
-
               <div class="col-2">
-                <mat-card-actions>
+                <mat-card-actions *ngIf="buttonType=='invite'"> 
                   <button mat-raised-button class="main-button" (click)="invite()">invite</button>
               </mat-card-actions>
+              <mat-card-actions *ngIf="buttonType=='accept'"> 
+                <button mat-raised-button class="main-button" (click)="accept()">accept</button>
+            </mat-card-actions>
               </div>
             </div>
     </mat-card-content>

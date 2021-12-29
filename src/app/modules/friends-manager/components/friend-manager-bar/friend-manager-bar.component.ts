@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-friend-manager-bar',
@@ -8,7 +9,7 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class FriendManagerBarComponent implements OnInit {
 
-  constructor() {}
+  constructor(private userService: UserService) {}
 
  
   
@@ -19,6 +20,6 @@ export class FriendManagerBarComponent implements OnInit {
 
   addFriend(){
     let value = this.username.value;
-  
+    this.userService.inviteFriend(value);
   }
 }

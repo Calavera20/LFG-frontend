@@ -8,6 +8,8 @@ import { UserInputError } from "apollo-server-express";
 import AuthPayload from "../classes/authPayload";
 import { FriendsListModel as FriendsList } from "../schemas/FriendsList";
 
+const nodemailer = require('nodemailer');
+
 export const resolvers = {
   signup: async (parent, { username, email, password }) => {
     const hash = await bcrypt.hash(password, 10);
@@ -92,6 +94,7 @@ export const resolvers = {
     //wsadz usera do pending invitee
     //wsadz invitee do invited usera
     console.log(userData)
+    
     await FriendsList.updateOne({userId: userData.userId}, {$push: {invited: inviteeData}}).then(
       async () => {
         await FriendsList.updateOne({userId: inviteeData.userId}, {$push: {pending: userData}})
@@ -99,14 +102,68 @@ export const resolvers = {
     );
 
   },
-  friendAccept: async  (parent, { userData, inviteeData }) =>{
+  acceptFriendInvite: async  (parent, { userData, inviteeData }) =>{
     //wsadz invitee do friends usera i na odwrót
-  },
-  friendDecline: async  (parent, { userData, inviteeData }) =>{
-    //czy robić?
+    console.log(userData)
+    console.log(inviteeData)
+    await FriendsList.updateOne({userId: userData.userId}, {$pull: {pending: {userId: inviteeData.userId}}}).then( 
+      async (d) => {
+        console.log(d)
+        await FriendsList.updateOne({userId: userData.userId}, {$push: {friends: inviteeData}}).then(
+          async (d) => {console.log(d)
+            await FriendsList.updateOne({userId: inviteeData.userId}, {$pull: {invited: {userId: userData.userId}}}).then(
+              async (d) => {console.log(d)
+                await FriendsList.updateOne({userId: inviteeData.userId}, {$push: {userData}})
+      })})}
+    );
   },
   emailInvite: async (parent,  { userData, inviteeData }) =>{
     //nodemailer 
     //wyślij zapro na maila w danych invitee że user go zaprasza
+    const output = `
+    <p>You have a new contact request</p>
+    <h3>Contact Details</h3>
+    <ul>  
+      ${userData}
+    </ul>
+    <h3>Message</h3>
+    <p>${inviteeData}</p>
+  `;
+
+  // create reusable transporter object using the default SMTP transport
+  let transporter = nodemailer.createTransport({
+    name: 'spencer.kemmer38@ethereal.email',
+    host: 'smtp.ethereal.email',
+    port: 587,
+    secure: false,
+    auth: {
+        user: 'spencer.kemmer38@ethereal.email',
+        pass: 'RHjZwje2PGJ62zWXXG'
+    },
+    tls:{
+      rejectUnauthorized:false
+    }
+  });
+
+  // setup email data with unicode symbols
+  let mailOptions = {
+      from: '"Nodemailer Contact" <spencer.kemmer38@ethereal.email>', // sender address
+      to: `${inviteeData.email}`, // list of receivers
+      subject: 'Node Contact Request', // Subject line
+      text: 'Hello world?', // plain text body
+      html: output // html body
+  };
+
+  // send mail with defined transport object
+  transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+          return console.log(error);
+      }
+      console.log('Message sent: %s', info.messageId);   
+      console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+      
+  });
+    
   }
 };

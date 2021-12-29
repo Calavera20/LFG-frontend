@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService, Spinner } from 'ngx-spinner';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-friends-manager',
@@ -7,15 +9,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FriendsManagerComponent implements OnInit {
 
-  constructor() { }
+  userId: String
+  friendsData: any;
+  constructor(private userService: UserService,
+    private spinner: NgxSpinnerService) { 
+    this.userId=localStorage.getItem('userId');
+  }
 
 
-  //trzymamy liste znajomych jako para id, username 
-  //trzymamy zaproszenia znajomych w tej samej postaci w oddzielnej tablicy dla każdego
-  //trzymamy liste użytkowników których zaprosiliśmy
-  //wyszukiwanie po username 
   //pole na wysłanie zaproszenia po username
+  //wyswietlanie każdej z tablic
   ngOnInit(): void {
+    console.log(this.userId)
+    this.userService.getAllFriendsData(this.userId).subscribe(
+      (data) => {
+        console.log(data)
+        this.friendsData = data;
+        this.spinner.hide();
+      },
+      (err) => {
+        console.log(err)
+        this.spinner.hide();
+      }
+    );;
   }
 
 }

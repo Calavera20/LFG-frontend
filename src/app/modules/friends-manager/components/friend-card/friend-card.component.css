@@ -1,0 +1,13 @@
+.mat-card {
+  width: 20em;
+  min-height: 3em;
+  max-height: 4em;
+  margin: 10px;
+  padding: auto;
+  box-sizing: content-box;
+}
+
+button {
+  left: -30px;
+  bottom: 0px;
+}

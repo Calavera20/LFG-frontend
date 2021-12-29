@@ -1,6 +1,9 @@
 import bcrypt from "bcrypt";
 import { GameCardModel as GameCard } from "../schemas/GameCard";
 import { GroupModel as Group } from "../schemas/Group";
+import { FriendsListModel as FriendsList } from "../schemas/FriendsList";
+
+import { UserModel as User } from "../schemas/User";
 
 export const resolvers = {
   hello: () => "Hello world!",
@@ -26,6 +29,29 @@ export const resolvers = {
       (err) => {}
     );
     console.log(res);
+    return res;
+  },
+  getFriendsList: async (parent, { userId }) => {
+    let res;
+    await FriendsList.findOne({userId: userId}).then(
+      (data) => {
+        res = data;
+        console.log(data)
+      },
+      (err) => {}
+    );
+    return res;
+  },
+  getUserData: async (parent, { userId }) => {
+    let res;
+    console.log(userId)
+    await User.findOne({_id: userId}).then(
+      (data) => {
+        res = data;
+        console.log(data)
+      },
+      (err) => {}
+    );
     return res;
   },
 };

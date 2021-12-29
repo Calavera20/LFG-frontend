@@ -23,7 +23,8 @@ export class AuthService {
               token,
               user {
                 id,
-                username
+                username,
+                email
               }
             }
         }
@@ -35,7 +36,9 @@ export class AuthService {
           console.log(data)
           if(data.login.user.username !== username) throw new Error("error"); else{
           localStorage.setItem('currentUser', username);
+          localStorage.setItem('userId',data.login.user.id)
           localStorage.setItem('token', data.login);
+          localStorage.setItem('email', data.login.user.email);
           console.log(data);
         }
         })

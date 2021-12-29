@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { NgxSpinner } from 'ngx-spinner';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-friend-card',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FriendCardComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  friendData: any;
+  constructor( private userService: UserService) { }
 
   ngOnInit(): void {
+    console.log(this.friendData)
+  }
+
+  invite(){
+    //this.spinner.show();
+    this.userService.inviteFriend(this.friendData)
   }
 
 }

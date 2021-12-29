@@ -92,9 +92,9 @@ export const resolvers = {
     //wsadz usera do pending invitee
     //wsadz invitee do invited usera
     console.log(userData)
-    await FriendsList.updateOne({userId: userData.id}, {$push: {invited: inviteeData}}).then(
+    await FriendsList.updateOne({userId: userData.userId}, {$push: {invited: inviteeData}}).then(
       async () => {
-        await FriendsList.updateOne({userId: inviteeData.id}, {$push: {pending: userData}})
+        await FriendsList.updateOne({userId: inviteeData.userId}, {$push: {pending: userData}})
       }
     );
 

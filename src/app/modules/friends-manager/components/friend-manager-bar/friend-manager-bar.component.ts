@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-friend-manager-bar',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FriendManagerBarComponent implements OnInit {
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
+ 
+  
+  ngOnInit(): void {}
+
+  username = new FormControl('', [Validators.maxLength(40)]);
+  // creator = new FormControl('', [Validators.maxLength(40)]);
+
+  addFriend(){
+    let value = this.username.value;
+  
   }
-
 }

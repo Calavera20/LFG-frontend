@@ -1,1 +1,27 @@
-<p>friend-manager-bar works!</p>
+<mat-card>
+    <mat-card-content>
+      <form>
+        <div class="row justify-content-left">
+          <div class="col-7">
+            <mat-form-field>
+              <input
+                matInput
+                [formControl]="username"
+                class="listing_search"
+                placeholder="Add friend"
+                name="username"
+              />
+            </mat-form-field>
+          </div>
+  
+          <div class="col">
+            <mat-card-actions>
+              <button mat-raised-button (click)="addFriend()" class="main-button">Send friend invite</button>
+            </mat-card-actions>
+          </div>
+
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  

@@ -6,5 +6,6 @@ export const typeDefs = `
     getFriendsList(userId: String): FriendsList
     getGameCards: [GameCard]
     getGroupsForGameId(gameId: String): [Group]
+    getUserData(userId: String): User
   }
 `;

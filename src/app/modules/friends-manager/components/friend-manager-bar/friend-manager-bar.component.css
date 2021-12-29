@@ -1,0 +1,19 @@
+.mat-card {
+  left: 0;
+  width: 30em;
+  height: 5em;
+  margin-bottom: 30px;
+}
+
+.listing_search {
+  width: 100%;
+}
+
+.mat-form-field {
+  width: 100%;
+  bottom: 0.5em;
+}
+button {
+  width: 100%;
+  bottom: 0.5em;
+}

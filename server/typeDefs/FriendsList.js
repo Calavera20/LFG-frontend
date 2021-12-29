@@ -6,13 +6,13 @@ export const typeDefs = `
     }
 
     type Friend{
-        id: String!
+        userId: String!
         username: String!
         email: String!
     }
 
     input InputFriend{
-        id: String!
+        userId: String!
         username: String!
         email: String!
     }

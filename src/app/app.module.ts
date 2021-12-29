@@ -21,6 +21,7 @@ import { getMainDefinition } from '@apollo/client/utilities';
 import {HttpLink} from 'apollo-angular/http'
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { NgxSpinnerModule } from "ngx-spinner";
+import { FriendsManagerModule } from './modules/friends-manager/friends-manager.module';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
     AppRoutingModule,
     SharedModule,
     DashboardModule,
-
+    FriendsManagerModule,
     ListingsModule,
     BrowserModule,
     BrowserAnimationsModule,

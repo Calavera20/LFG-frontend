@@ -1,4 +1,10 @@
-import {gql } from "apollo-server-express";
 
-export const typeDefs = gql`
+
+export const typeDefs = `
+type Message {
+    text: String
+    creator: String
+    creationDate: String
+    channelId: String
+}
 `;

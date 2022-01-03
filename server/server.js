@@ -1,4 +1,4 @@
-import { ApolloServer } from "apollo-server-express";
+import { ApolloServer, graphiqlExpress } from "apollo-server-express";
 import express from "express";
 import { typeDefs as UserDefs } from "./typeDefs/User";
 import { typeDefs as QueryDefs } from "./typeDefs/Query";
@@ -6,8 +6,11 @@ import { typeDefs as MutationDefs } from "./typeDefs/Mutation";
 import { typeDefs as GameCardDefs } from "./typeDefs/GameCard";
 import { typeDefs as GroupDefs } from "./typeDefs/Group";
 import { typeDefs as FriendsListDefs } from "./typeDefs/FriendsList";
+import { typeDefs as MessageDefs } from "./typeDefs/Message";
+import { typeDefs as SubscriptionDefs } from "./typeDefs/Subscription";
 import { resolvers as Mutation } from "./resolvers/Mutation";
 import { resolvers as Query } from "./resolvers/Query";
+import { resolvers as Subscription } from "./resolvers/Subscription";
 import { connectDB, db } from "./dbConnector";
 import expressJwt from "express-jwt";
 
@@ -29,10 +32,13 @@ async function startApolloServer() {
   const resolvers = {
     Mutation,
     Query,
+    Subscription
   };
 
   const typeDefs = gql(
-    QueryDefs + MutationDefs + UserDefs + GameCardDefs + GroupDefs + FriendsListDefs
+    QueryDefs + MutationDefs + UserDefs + GameCardDefs + GroupDefs + FriendsListDefs 
+    + MessageDefs 
+    + SubscriptionDefs
   );
 
   const server = new ApolloServer({

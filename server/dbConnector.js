@@ -6,7 +6,7 @@ const uri = "mongodb+srv://LFG:aUqBCD4_!_k2vPw@cluster0.f0liw.mongodb.net/LFG_Ap
 
 export const connectDB = async () => {
     try {
-        await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true , useCreateIndex: true});
+        await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
         
 
         console.log('MongoDB connected!!');

@@ -1,4 +1,5 @@
 export default class Group{
+    id: String
     gameId: String
     description: String
     creator: String

@@ -36,7 +36,7 @@ export class ListingCardComponent implements OnInit {
 
 
   onClick(){
-    this.router.navigate(['group'],{queryParams: {groupId: "id"}})
+    this.router.navigate(['group'],{queryParams: {groupId: this.groupData.id}})
   }
 
   private sendJoinRequest(){

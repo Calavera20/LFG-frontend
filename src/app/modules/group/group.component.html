@@ -2,11 +2,11 @@
   <div class="col"></div>
   <div class="col-8">
     <mat-card class="group-card">
-      <mat-card-header>Opis może ucięty</mat-card-header>
+      <mat-card-header *ngIf="group">{{group.description}} {{group.id}}</mat-card-header>
       <mat-card-content>
         <div class="row justify-content-center">
-          <div class="col-8"><app-chat></app-chat></div>
-          <div class="col"><app-members-list></app-members-list></div>
+          <div class="col-8"><app-chat *ngIf="group" [groupId]="group.id"></app-chat></div>
+          <div class="col"><app-members-list *ngIf="group" [members]="group.members"></app-members-list></div>
         </div>
       </mat-card-content>
     </mat-card>

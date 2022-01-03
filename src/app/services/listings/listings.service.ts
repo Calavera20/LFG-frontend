@@ -36,6 +36,31 @@ export class ListingsService {
         })
       );
   }
+  getGroupByGroupId(groupId: String) {
+    return this.apollo
+      .query<any>({
+        query: gql`
+          query {
+            getGroupByGroupId(groupId:"${groupId}") {
+              id
+              members
+              creationDate
+              gameId
+              isOpen
+              currentSize
+              playerLimit
+              creator
+              description
+            }
+          }
+        `,
+      })
+      .pipe(
+        map((res) => {
+          return res.data.getGroupByGroupId;
+        })
+      );
+  }
 
   createGroup(description: String, creator: String, playerLimit: String, gameId: String){
     this.spinner.show();

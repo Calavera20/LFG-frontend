@@ -10,5 +10,6 @@ export const typeDefs = `
     friendInvite(userData: InputFriend, inviteeData: InputFriend): String
     acceptFriendInvite(userData: InputFriend, inviteeData: InputFriend): String
     emailInvite(userData: InputFriend, inviteeData: InputFriend): String
+    addMessage(message: MessageInput): Message
   }
 `;

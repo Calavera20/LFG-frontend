@@ -51,12 +51,12 @@ import { FriendsManagerModule } from './modules/friends-manager/friends-manager.
       useFactory(httpLink: HttpLink): ApolloClientOptions<any> {
         // Create an http link:
         const http = httpLink.create({
-          uri: 'http://localhost:4000/graphql',
+          uri: 'http://localhost:4000/',
         });
 
         // Create a WebSocket link:
         const ws = new WebSocketLink({
-          uri: 'ws://localhost:4000/graphql',
+          uri: 'ws://localhost:4000/',
           options: {
             reconnect: true,
           },

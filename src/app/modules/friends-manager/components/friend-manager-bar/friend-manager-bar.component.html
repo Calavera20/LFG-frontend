@@ -12,6 +12,9 @@
                 name="username"
               />
             </mat-form-field>
+            <mat-error *ngIf="findError">
+              Could not find username
+            </mat-error>
           </div>
   
           <div class="col">

@@ -1,0 +1,15 @@
+.row {
+  margin-right: 20px;
+}
+
+.member {
+  font-size: large;
+  font-weight: bold;
+}
+
+mat-card {
+  padding-right: 40px;
+  background-color: #202330;
+  margin-bottom: 20px;
+  height: 80px;
+}

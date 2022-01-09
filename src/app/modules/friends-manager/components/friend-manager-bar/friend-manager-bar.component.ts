@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { ifError } from 'assert';
 import { UserService } from 'src/app/services/user/user.service';
+import { isUndefined } from 'util';
 
 @Component({
   selector: 'app-friend-manager-bar',
@@ -11,15 +13,15 @@ export class FriendManagerBarComponent implements OnInit {
 
   constructor(private userService: UserService) {}
 
- 
-  
+  findError: boolean = false;
+
   ngOnInit(): void {}
 
   username = new FormControl('', [Validators.maxLength(40)]);
-  // creator = new FormControl('', [Validators.maxLength(40)]);
 
   addFriend(){
     let value = this.username.value;
-    this.userService.inviteFriend(value);
+    let result = this.userService.inviteFriend(value);
+    if(result === undefined) this.findError=true;
   }
 }

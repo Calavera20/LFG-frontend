@@ -11,7 +11,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { ListingsModule } from './modules/listings/listings.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { GroupModule } from './modules/group/group.module';
 import { APOLLO_OPTIONS } from 'apollo-angular';
@@ -22,6 +22,7 @@ import {HttpLink} from 'apollo-angular/http'
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { NgxSpinnerModule } from "ngx-spinner";
 import { FriendsManagerModule } from './modules/friends-manager/friends-manager.module';
+import { AuthInterceptorService } from './services/AuthInterceptor/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,11 @@ import { FriendsManagerModule } from './modules/friends-manager/friends-manager.
       },
       deps: [HttpLink],
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent],
 })

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
+import { NgxSpinner, NgxSpinnerService } from 'ngx-spinner';
 import { of, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
@@ -12,9 +13,11 @@ class Token {
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient, private apollo: Apollo) {}
+  constructor( private apollo: Apollo, private spinner: NgxSpinnerService) {}
 
   login(username, password) {
+    
+    this.spinner.show();
     return this.apollo
       .mutate<any>({
         mutation: gql`
@@ -33,19 +36,19 @@ export class AuthService {
       .pipe(
         map((res) => {
           let { data } = res;
-          console.log(data)
           if(data.login.user.username !== username) throw new Error("error"); else{
           localStorage.setItem('currentUser', username);
           localStorage.setItem('userId',data.login.user.id)
-          localStorage.setItem('token', data.login);
+          localStorage.setItem('token', data.login.token);
           localStorage.setItem('email', data.login.user.email);
-          console.log(data);
         }
         })
       );
   }
 
   signup(username, email, password) {
+    
+    this.spinner.show();
     return this.apollo
       .mutate<any>({
         mutation: gql`
@@ -57,13 +60,12 @@ export class AuthService {
       .pipe(
         map((res) => {
           let { data } = res;
-          console.log(data);
         }
         )
       );
   }
 
   logout() {
-    localStorage.removeItem('currentUser');
+    localStorage.removeItem('token');
   }
 }

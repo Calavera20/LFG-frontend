@@ -9,6 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
@@ -20,7 +21,8 @@ export class SignupComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService
   ) {}
 
   matcherValidator(controlName: string, matchingControlName: string) {
@@ -61,7 +63,9 @@ export class SignupComponent implements OnInit {
     }
   );
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    localStorage.clear();
+  }
 
   submit() {
     if (this.signupForm.valid) {
@@ -73,10 +77,12 @@ export class SignupComponent implements OnInit {
         )
         .subscribe(
           (res) => {
+            this.spinner.hide();
             this.router.navigate(['login']);
           },
           (err) => {
             console.log(err)
+            this.spinner.hide();
           }
         );
     }

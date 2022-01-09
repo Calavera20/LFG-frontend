@@ -8,3 +8,14 @@
 mat-card-content {
   height: 100%;
 }
+
+.group-description {
+  padding-top: 5px;
+  font-size: large;
+  font-weight: 500;
+}
+
+.delete {
+  font-size: large;
+  font-weight: bold;
+}

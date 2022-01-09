@@ -6,3 +6,18 @@
   height: 40px;
   align-items: middle;
 }
+
+.message.creator {
+  background-color: #92b7cc;
+}
+
+.message-author {
+  font-weight: bold;
+}
+.message-text {
+}
+
+.message-time {
+  font-size: small;
+  color: #15171f;
+}

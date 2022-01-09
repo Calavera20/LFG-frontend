@@ -12,6 +12,8 @@ export class ListingsService {
   constructor(private http: HttpClient, private apollo: Apollo, private spinner: NgxSpinnerService) { }
 
   getGroupsForGameId(gameId: String) {
+    
+    this.spinner.show();
     return this.apollo
       .query<any>({
         query: gql`
@@ -37,6 +39,8 @@ export class ListingsService {
       );
   }
   getGroupByGroupId(groupId: String) {
+    
+    this.spinner.show();
     return this.apollo
       .query<any>({
         query: gql`
@@ -69,6 +73,7 @@ export class ListingsService {
         mutation: gql`
           mutation {
             createGroup(description:"${description}", creator: "${creator}", playerLimit: "${playerLimit}", gameId: "${gameId}") 
+            
           }
         `,
       })

@@ -27,4 +27,35 @@ export class GraphqlSubscriptionService {
       fetchPolicy: 'no-cache'
     });
   }
+
+  subscribeToRequests(groupId: String): Observable<any> {
+    this.query = gql`
+    subscription{
+      requestAdded(groupId: "${groupId}"){
+        data
+        groupId
+      }
+    }
+    `;
+
+    return this.apollo.subscribe({
+      query: this.query,
+      fetchPolicy: 'no-cache'
+    });
+  }
+  subscribeToPermission(groupId: String): Observable<any> {
+    this.query = gql`
+    subscription{
+      groupPermissionChanged(groupId: "${groupId}"){
+        groupId
+        change
+      }
+    }
+    `;
+
+    return this.apollo.subscribe({
+      query: this.query,
+      fetchPolicy: 'no-cache'
+    });
+  }
 }

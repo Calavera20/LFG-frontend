@@ -1,4 +1,4 @@
-<div class="row justify-content-center chat">
+<div class="row justify-content-center  chat">
   <div class="col-12">
     <div class="row justify-content-center chat-messages" *ngFor="let message of messages">
       <div class="col">
@@ -11,11 +11,11 @@
       <div class="col-9 chat-input-textarea">
         <mat-form-field appearance="fill">
           <mat-label></mat-label>
-          <textarea style="resize: none" matInput></textarea>
+          <textarea style="resize: none" matInput [(ngModel)]="textArea"></textarea>
         </mat-form-field>
       </div>
       <div class="col-3 chat-input-submit">
-          <button mat-raised-button class="main-button">Submit</button>
+          <button mat-raised-button class="main-button" (click)="submit()">Submit</button>
       </div>
     </div>
   </div>

@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { JoiningGroupComponent } from '../joining-group/joining-group.component';
 
 @Component({
   selector: 'app-listing-card',
@@ -22,7 +24,8 @@ export class ListingCardComponent implements OnInit {
 
   elapsedTime: number;
 
-  constructor(private router:Router) {}
+  constructor(private router:Router,
+    private modalService: NgbModal) {}
 
   ngOnInit(): void {
     console.log(this.groupData)
@@ -36,16 +39,16 @@ export class ListingCardComponent implements OnInit {
 
 
   onClick(){
-    this.router.navigate(['group'],{queryParams: {groupId: this.groupData.id}})
+    
+      const modalRef = this.modalService.open(JoiningGroupComponent,{
+        centered: true, size: 'lg'
+      });
+      modalRef.componentInstance.name = 'Joining Group';
+      let data = {
+        groupId: this.groupData.id,
+        members: this.groupData.members
+      }
+      
+      modalRef.componentInstance.fromParent = data;
   }
-
-  private sendJoinRequest(){
-
-  }
-
-  private handleRequestResponse(){
-
-  }
-
-
 }

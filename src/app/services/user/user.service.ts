@@ -49,28 +49,8 @@ export class UserService {
         );
     }
 
-    // getUserDataForFriendInviteById(userId: String){
-    //   this.spinner.show();  
-    //   return this.apollo
-    //     .query<any>({
-    //       query: gql`
-    //       query {
-    //         getUserData(_id: "${userId}"){
-    //           username
-    //           email
-    //         }
-    //       }
-    //       `,
-    //     })
-    //     .pipe(
-    //       map((res) => {
-    //         return res.data.getUserData;
-    //       })
-    //     );
-    // }
-  
-    getUserDataForFriendInviteByUsername(username: String){
-      //this.spinner.show();  
+    getUserDataForFriendInviteByUsername(username: String){ 
+    this.spinner.show();
       return this.apollo
         .query<any>({
           query: gql`
@@ -91,6 +71,8 @@ export class UserService {
     }
  
     inviteFriend(inviteeUsername){
+      
+    this.spinner.show();
       let userData= {
         userId: localStorage.getItem('userId'),
         username: localStorage.getItem('currentUser'),
@@ -103,7 +85,6 @@ export class UserService {
           username: data.username,
           email: data.email
         }
-        console.log(invitee)
 
         return this.apollo
         .mutate<any>({
@@ -125,13 +106,13 @@ export class UserService {
         })
         .pipe(
           map((res) => {
-            console.log(res)
             this.spinner.hide();
-            return res.data.friendInvite;
-            
+            return res.data.friendInvite; 
           })
       ).subscribe();
-      })
+      
+    
+    })
       
     
     }
@@ -147,9 +128,8 @@ export class UserService {
         username: inviteeData.username,
         email: inviteeData.email
       }
-      console.log(userData)
-      console.log(inviteeData)
       
+    this.spinner.show();
     return this.apollo
       .mutate<any>({
         mutation: gql`
@@ -170,16 +150,47 @@ export class UserService {
       })
       .pipe(
         map((res) => {
-          console.log(res)
           this.spinner.hide();
           return res.data.acceptFriendInvite;
-          
         })
       );
     }
 
-    sendPartyInvite(){
-
+    sendEmailInvitation(inviteeData){
+      let userData= {
+        userId: localStorage.getItem('userId'),
+        username: localStorage.getItem('currentUser'),
+        email: localStorage.getItem('email')
+      }
+      let invitee= {
+        userId: inviteeData.userId,
+        username: inviteeData.username,
+        email: inviteeData.email
+      }
+      return this.apollo
+      .mutate<any>({
+        mutation: gql`
+          mutation {
+            emailInvite(
+            userData: {
+              userId: "${userData.userId}",
+              username: "${userData.username}",
+              email: "${userData.email}",
+            }, 
+            inviteeData: {
+              userId: "${invitee.userId}",
+              username: "${invitee.username}",
+              email: "${invitee.email}",
+            }) 
+          }
+        `,
+      })
+      .pipe(
+        map((res) => {
+          this.spinner.hide();
+          return res.data.emailInvite;
+        })
+      );
     }
-  delete(id: number) {}
+    
 }

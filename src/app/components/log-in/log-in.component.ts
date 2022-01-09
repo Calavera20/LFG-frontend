@@ -13,6 +13,7 @@ export class LogInComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+    localStorage.clear();
   }
   usernameFormControl = new FormControl('', [Validators.required]);
   passwordFormControl = new FormControl('', [Validators.required, Validators.minLength(8)])

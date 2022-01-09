@@ -1,1 +1,25 @@
-<p>{{member}}</p>
+<mat-card *ngIf="isCreator">
+    <mat-card-content >
+        <div class="row justify-content-center" >
+            <div class="col-10 member">
+              {{member}}
+            </div> 
+            <div class="col-2">
+                <mat-card-actions *ngIf="member != currentUsername">
+                  <button mat-raised-button class="main-button" (click)="remove()">Remove</button>
+              </mat-card-actions>
+              </div>
+            </div>
+    </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="!isCreator">
+    <mat-card-content >
+        <div class="row justify-content-center" >
+            <div class="col member">
+              {{member}}
+            </div> 
+        </div>   
+    </mat-card-content>
+</mat-card>
+

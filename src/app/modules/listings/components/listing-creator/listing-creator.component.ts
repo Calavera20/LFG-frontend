@@ -25,8 +25,6 @@ export class ListingCreatorComponent {
     private router: Router) {}
 
 
-     
-
   description = new FormControl('', [Validators.maxLength(40), Validators.minLength(8), Validators.required]);
   playerLimit = new FormControl('', [Validators.min(1), Validators.max(10), Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]);
 
@@ -38,7 +36,7 @@ export class ListingCreatorComponent {
       this.gameTitleParameter = params['title']
     })
   }
-  //na liście zrób sortowanie od najnowszych oraz po opisie
+
 
   submit(){
     if(!this.playerLimit.errors && !this.description.errors)
@@ -46,9 +44,7 @@ export class ListingCreatorComponent {
       (data) => {
         console.log(data)
         this.activeModal.dismiss();
-
-        this.reloadCurrentRoute();
-        this.spinner.hide();
+        this.router.navigate(['group'],{queryParams: {groupId: data}})
       },
       (err) => {
         console.log(err)

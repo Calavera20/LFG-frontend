@@ -9,10 +9,13 @@ export class MembersListComponent implements OnInit {
 
   @Input()
   members: any;
+  @Input()
+  creator: string;
+  isCreator: boolean;
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.members)
+    this.isCreator = this.creator == localStorage.getItem("currentUser");
   }
 
 }

@@ -57,7 +57,7 @@ import { AuthInterceptorService } from './services/AuthInterceptor/auth-intercep
 
         // Create a WebSocket link:
         const ws = new WebSocketLink({
-          uri: 'ws://lfg-server-jakub-remiszewski.herokuapp.com/graphql',
+          uri: 'wss://lfg-server-jakub-remiszewski.herokuapp.com/graphql',
           options: {
             reconnect: true,
           },

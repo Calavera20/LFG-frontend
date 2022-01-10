@@ -52,12 +52,12 @@ import { AuthInterceptorService } from './services/AuthInterceptor/auth-intercep
       useFactory(httpLink: HttpLink): ApolloClientOptions<any> {
         // Create an http link:
         const http = httpLink.create({
-          uri: 'http://localhost:4000/',
+          uri: 'https://lfg-server-jakub-remiszewski.herokuapp.com/',
         });
 
         // Create a WebSocket link:
         const ws = new WebSocketLink({
-          uri: 'ws://localhost:4000/',
+          uri: 'ws://lfg-server-jakub-remiszewski.herokuapp.com/graphql',
           options: {
             reconnect: true,
           },

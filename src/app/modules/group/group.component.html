@@ -1,25 +1,70 @@
-<div class="row justify-content-center">
+<div class="row justify-content-center group-main">
   <div class="col"></div>
   <div class="col-8">
     <mat-card class="group-card">
-      <mat-card-header class="group-description" *ngIf="group">{{group.description}}</mat-card-header>
+      <mat-card-header class="group-description" *ngIf="group">{{
+        group.description
+      }}</mat-card-header>
       <mat-card-content>
         <div class="row justify-content-center">
-          <div class="col-8"><app-chat *ngIf="group" [groupId]="group.id"></app-chat></div>
-          <div class="col"><app-members-list *ngIf="group" [creator]="group.creator" [members]="group.members"></app-members-list></div>
+          <div class="col-8">
+            <app-chat *ngIf="group" [groupId]="group.id"></app-chat>
+          </div>
+          <div class="col">
+            <app-members-list
+              *ngIf="group"
+              [creator]="group.creator"
+              [members]="group.members"
+            ></app-members-list>
+          </div>
         </div>
-        <div class="row justify-content-center" *ngIf="isCreator && requestUsernames && requestUsernames.length>0">
-          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let username of requestUsernames">
-            <mat-card class="">{{username}} <mat-card-actions>
-              <button mat-raised-button class="main-button" (click)="accept(username)">Accept</button>
-          </mat-card-actions>
-          <mat-card-actions>
-            <button mat-raised-button class="main-button" (click)="decline(username)">Decline</button>
-        </mat-card-actions></mat-card>
+        <div class="row justify-content-center request-header">
+          <div class="col">
+            <mat-card class="request-header-text">Join requests</mat-card>
+          </div>
+        </div>
+        <div
+          class="row justify-content-center"
+          *ngIf="isCreator && requestUsernames && requestUsernames.length > 0"
+        >
+          <div
+            class="col-xs-12 col-sm-6 col-md-4 col-lg-3"
+            *ngFor="let username of requestUsernames"
+          >
+            <mat-card class="join-card">
+              <div class="row justify-content-center">
+                <div class="col top request-username ">{{ username }}</div>
+              </div>
+
+              <div class="row justify-content-center">
+                <div class="col bottom ">
+                  <mat-card-actions>
+                    <button
+                      mat-raised-button
+                      class="main-button"
+                      (click)="accept(username)"
+                    >
+                      Accept
+                    </button>
+                  </mat-card-actions>
+                  <mat-card-actions>
+                    <button
+                      mat-raised-button
+                      class="main-button"
+                      (click)="decline(username)"
+                    >
+                      Decline
+                    </button>
+                  </mat-card-actions>
+                </div>
+              </div>
+            </mat-card>
           </div>
         </div>
       </mat-card-content>
     </mat-card>
   </div>
-  <div class="col"><div class="delete" *ngIf="isCreator" (click)="deleteGroup()">X</div></div>
+  <div class="col">
+    <div class="delete" *ngIf="isCreator" (click)="deleteGroup()">X</div>
+  </div>
 </div>

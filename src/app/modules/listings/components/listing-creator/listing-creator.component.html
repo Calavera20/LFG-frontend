@@ -1,6 +1,6 @@
 <mat-card class="login">
   <mat-card-header>
-    <h1>Stwórz grupę</h1>
+    <h1>Create Group</h1>
     <button
       type="button"
       class="close"
@@ -20,7 +20,7 @@
                 matInput
                 [formControl]="description"
                 class="description-textarea"
-                placeholder="Opis"
+                placeholder="Description"
                 name="search"
                 value=""
               ></textarea>
@@ -60,7 +60,7 @@
               <input
                 matInput
                 [formControl]="playerLimit"
-                placeholder="Limit graczy (1-10)"
+                placeholder="Player limit (1-10)"
                 name="size-limit"
               />
             </mat-form-field>
@@ -107,7 +107,7 @@
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button (click)="submit()" class="main-button">
-      Stwórz
+      Create
     </button>
   </mat-card-actions>
 </mat-card>

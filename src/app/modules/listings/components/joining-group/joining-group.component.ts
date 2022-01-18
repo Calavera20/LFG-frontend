@@ -23,14 +23,12 @@ export class JoiningGroupComponent implements OnInit {
   gameTitleParameter: String;
   modalText: String;
 
-  constructor(private activatedRoute: ActivatedRoute,
+  constructor(
     public activeModal: NgbActiveModal,
-    private listingsService: ListingsService,
-    private spinner: NgxSpinnerService,
     private router: Router,
     private gqlSubscriptionService: GraphqlSubscriptionService,
     private groupService: GroupService) {
-      this.modalText="join request has been sent please wait";
+      this.modalText="Join request has been sent, please wait.";
     }
 
 

@@ -1,0 +1,36 @@
+.header {
+  height: 176px;
+  width: 100%;
+}
+.custom-toggler.navbar-toggler {
+  border-color: #45a29e;
+}
+.custom-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(102, 252, 241, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.icon {
+  height: 80px;
+  width: 80px;
+}
+
+.icon-small {
+  margin-left: 15px;
+  height: 40px;
+  width: 40px;
+}
+.navbar-brand {
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  padding-top: 30px;
+  padding-left: 40px;
+  padding-right: 40px;
+  margin: 0;
+}
+
+.icon-column {
+  padding: 0;
+}

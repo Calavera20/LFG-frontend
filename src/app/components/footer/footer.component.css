@@ -1,0 +1,13 @@
+.footer {
+  bottom: 0;
+  width: 100%;
+  justify-content: center;
+  height: 30px;
+  padding: 5px;
+  color: #303030;
+  font-size: 12px;
+}
+
+.row {
+  margin: 0;
+}

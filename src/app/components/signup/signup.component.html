@@ -1,0 +1,164 @@
+<div class="container-fluid h-100">
+  <div class="row h-100">
+    <div class="col-4"></div>
+
+    <div class="col h-100">
+      <mat-card class="login">
+        <mat-card-header>
+          <mat-card-title>Sign Up</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form class="example-form" [formGroup]="signupForm" autocomplete="off">
+            <table class="example-full-width" cellspacing="0">
+              <tr>
+                <td>
+                  <mat-form-field class="example-full-width">
+                    <input
+                      matInput
+                      class="login_input"
+                      placeholder="Username"
+                      name="username"
+                      required
+                      formControlName="usernameFormControl"
+                    />
+                  </mat-form-field>
+                  <mat-error
+                    *ngIf="
+                      signupForm.controls.usernameFormControl.hasError(
+                        'required'
+                      ) && signupForm.controls.usernameFormControl.touched
+                    "
+                  >
+                    Username is <strong>required</strong>
+                  </mat-error>
+                </td>
+              </tr>
+              <tr></tr>
+              <tr>
+                <td>
+                  <mat-form-field class="example-full-width">
+                    <input
+                      matInput
+                      class="email_input"
+                      placeholder="Email"
+                      name="email"
+                      required
+                      formControlName="emailFormControl"
+                    />
+                  </mat-form-field>
+                  <mat-error
+                    *ngIf="
+                      signupForm.controls.emailFormControl.hasError(
+                        'required'
+                      ) && signupForm.controls.emailFormControl.touched
+                    "
+                  >
+                    Email is <strong>required</strong>
+                  </mat-error>
+                  <mat-error
+                  *ngIf="
+                    signupForm.controls.emailFormControl.hasError(
+                      'email'
+                    ) && signupForm.controls.emailFormControl.touched
+                  "
+                >
+                  Wrong format
+                </mat-error>
+                </td>
+              </tr>
+              <tr></tr>
+              <tr>
+                <td>
+                  <mat-form-field class="example-full-width">
+                    <input
+                      type="password"
+                      matInput
+                      placeholder="Password"
+                      name="password"
+                      required
+                      formControlName="passwordFormControl"
+                      autocomplete="new-password"
+                    />
+                  </mat-form-field>
+                  <mat-error
+                    *ngIf="
+                      signupForm.controls.passwordFormControl.hasError(
+                        'required'
+                      ) && signupForm.controls.passwordFormControl.touched
+                    "
+                  >
+                    Password is <strong>required</strong>
+                  </mat-error>
+                  <mat-error
+                    *ngIf="
+                      signupForm.controls.passwordFormControl.hasError(
+                        'minlength'
+                      ) && signupForm.controls.passwordFormControl.touched
+                    "
+                  >
+                    Password is <strong>too short</strong>
+                  </mat-error>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field class="example-full-width">
+                    <input
+                      type="password"
+                      matInput
+                      placeholder="Confirm password"
+                      name="confirm-password"
+                      required
+                      formControlName="passwordConfirmationFormControl"
+                    /> </mat-form-field
+                  ><mat-error
+                    *ngIf="
+                      signupForm.controls.passwordConfirmationFormControl.hasError(
+                        'required'
+                      ) &&
+                      signupForm.controls.passwordConfirmationFormControl
+                        .touched
+                    "
+                  >
+                    Password confirmation is <strong>required</strong>
+                  </mat-error>
+                  <mat-error
+                    *ngIf="
+                      signupForm.controls.passwordConfirmationFormControl.hasError(
+                        'minlength'
+                      ) &&
+                      signupForm.controls.passwordConfirmationFormControl
+                        .touched
+                    "
+                  >
+                    Password confirmation is <strong>too short</strong>
+                  </mat-error>
+                  <mat-error
+                    *ngIf="
+                      signupForm.controls.passwordConfirmationFormControl.hasError(
+                        'matcherValidator'
+                      ) &&
+                      signupForm.controls.passwordConfirmationFormControl
+                        .touched
+                    "
+                  >
+                    Password <strong>doesn't match</strong>
+                  </mat-error>
+                </td>
+              </tr>
+            </table>
+          </form>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button (click)="submit()" class="main-button">Submit</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <div class="col-4"></div>
+  </div>
+  <div class="row">
+    <div class="col text-center login_help">
+      Already have an account? <a href="login">Login!</a>
+    </div>
+  </div>
+</div>

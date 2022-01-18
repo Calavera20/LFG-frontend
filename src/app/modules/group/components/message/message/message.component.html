@@ -1,13 +1,13 @@
 <div class="row justify-content-center message" [ngClass]="{'creator': message.creator === username}" *ngIf="message"> 
     <div class="col-2 message-author ">
-        <p>{{message.creator}}</p>
+        {{message.creator}}
         </div>
     <div class="col-8 message-text">
-        <p>{{message.text}}</p>
+        {{message.text}}
     </div>
     
         <div class="col-2 message-time">
-            <p>{{creationTime}}</p>
+            {{creationTime}}
             </div>
 
 </div>

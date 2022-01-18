@@ -20,7 +20,13 @@ username: String;
     let date = new Date(this.message.creationDate)
     let hour =  date.getHours()
     let minute =  date.getMinutes()
+    if(minute<10){
+      
+    this.creationTime = hour + ":0" + minute;
+    }else{
+      
     this.creationTime = hour + ":" + minute;
+    }
   }
 
 }

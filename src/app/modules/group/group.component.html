@@ -18,7 +18,7 @@
             ></app-members-list>
           </div>
         </div>
-        <div class="row justify-content-center request-header">
+        <div class="row justify-content-center request-header" *ngIf="isCreator && requestUsernames && requestUsernames.length > 0">
           <div class="col">
             <mat-card class="request-header-text">Join requests</mat-card>
           </div>

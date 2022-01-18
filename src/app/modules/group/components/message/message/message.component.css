@@ -21,3 +21,7 @@
   font-size: small;
   color: #15171f;
 }
+
+.message > * {
+  padding: 8px;
+}

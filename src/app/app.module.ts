@@ -50,23 +50,18 @@ import { AuthInterceptorService } from './services/AuthInterceptor/auth-intercep
     {
       provide: APOLLO_OPTIONS,
       useFactory(httpLink: HttpLink): ApolloClientOptions<any> {
-        // Create an http link:
         const http = httpLink.create({
-          uri: 'https://lfg-server-jakub-remiszewski.herokuapp.com/',
+          uri: 'http://lfg-server-jakub-remiszewski.herokuapp.com/',
         });
 
-        // Create a WebSocket link:
         const ws = new WebSocketLink({
-          uri: 'wss://lfg-server-jakub-remiszewski.herokuapp.com/',
+          uri: 'ws://lfg-server-jakub-remiszewski.herokuapp.com/',
           options: {
             reconnect: true,
           },
         });
 
-        // using the ability to split links, you can send data to each link
-        // depending on what kind of operation is being sent
         const link = split(
-          // split based on operation type
           ({query}) => {
             const data = getMainDefinition(query);
             return (

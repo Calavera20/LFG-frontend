@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LogInComponent } from  "./modules/main/components/log-in/log-in.component"
 import { PageNotFoundComponent } from './modules/main/components/page-not-found/page-not-found.component';
-import { SignupComponent } from './modules/main//components/signup/signup.component';
+import { SignupComponent } from './modules/main/components/signup/signup.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { FriendsManagerComponent } from './modules/friends-manager/friends-manager.component';
 import { GroupComponent } from './modules/group/group.component';

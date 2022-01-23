@@ -1,5 +1,5 @@
 <nav class="mb-1 navbar navbar-expand-lg navbar-dark info-color header h-100">
-    <a class="navbar-brand" href="dashboard">
+    <a class="navbar-brand" href="dashboard" *ngIf="userService.isUserLoggedIn()">
         <mat-icon svgIcon="home" class="icon"></mat-icon>
     </a>
     <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,11 +12,11 @@
             <mat-icon svgIcon="manage-accounts" class="icon-small"></mat-icon>
           </a>
         </li>
-        <li class="nav-item" *ngIf="!userService.isUserLoggedIn()">
+        <!-- <li class="nav-item" *ngIf="!userService.isUserLoggedIn()">
           <a class="nav-link waves-effect waves-light" href="login">
             <mat-icon svgIcon="login" class="icon-small"></mat-icon>
         </a>
-        </li>
+        </li> -->
         <li class="nav-item dropdown" (click)="logout()" *ngIf="userService.isUserLoggedIn()">
           <a class="nav-link waves-effect waves-light" href="login">
             <mat-icon svgIcon="logout" class="icon-small"></mat-icon>

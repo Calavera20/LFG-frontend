@@ -4,6 +4,7 @@ import { FriendsManagerComponent } from './friends-manager.component';
 import { FriendCardComponent } from './components/friend-card/friend-card.component';
 import { FriendManagerBarComponent } from './components/friend-manager-bar/friend-manager-bar.component';
 import { SharedModule } from '../shared/shared.module';
+import { FriendInviteModalComponent } from './components/friend-invite-modal/friend-invite-modal.component';
 
 
 
@@ -11,7 +12,8 @@ import { SharedModule } from '../shared/shared.module';
   declarations: [
     FriendsManagerComponent,
     FriendCardComponent,
-    FriendManagerBarComponent
+    FriendManagerBarComponent,
+    FriendInviteModalComponent
   ],
   imports: [
     CommonModule,

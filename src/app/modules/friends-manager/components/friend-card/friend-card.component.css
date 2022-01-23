@@ -11,3 +11,9 @@ button {
   left: -30px;
   bottom: 0px;
 }
+
+.username {
+  padding-top: 13px;
+  font-size: large;
+  font-weight: bold;
+}

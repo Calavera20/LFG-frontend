@@ -1,0 +1,44 @@
+<mat-card class="login">
+    <mat-card-header>
+      <h1>Send invitiation message</h1>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="activeModal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </mat-card-header>
+    <mat-card-content>
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+            <textarea
+              matInput
+              [formControl]="message"
+              class="description-textarea"
+              placeholder="Message"
+              name="search"
+              value=""
+            ></textarea>
+          </mat-form-field>
+          <mat-error
+                  *ngIf="
+                    message.hasError(
+                      'required'
+                    ) && message.touched
+                  "
+                >
+                  Message is <strong>required</strong>
+                </mat-error>
+               
+            
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button (click)="submit()" class="main-button">
+        Send
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  

@@ -156,7 +156,7 @@ export class UserService {
       );
     }
 
-    sendEmailInvitation(inviteeData){
+    sendEmailInvitation(inviteeData, message){
       let userData= {
         userId: localStorage.getItem('userId'),
         username: localStorage.getItem('currentUser'),
@@ -181,7 +181,9 @@ export class UserService {
               userId: "${invitee.userId}",
               username: "${invitee.username}",
               email: "${invitee.email}",
-            }) 
+            }
+            message: "${message}"
+            ),
           }
         `,
       })

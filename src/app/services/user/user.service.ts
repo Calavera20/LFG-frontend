@@ -194,5 +194,22 @@ export class UserService {
         })
       );
     }
+
+    checkIfUsernameExists(username){
+      return this.apollo
+      .query<any>({
+        query: gql`
+          query {
+            checkIfUsernameExists(username: "${username}"),
+          }
+        `,
+      })
+      .pipe(
+        map((res) => {
+          this.spinner.hide();
+          return res.data.checkIfUsernameExists;
+        })
+      );
+    }
     
 }

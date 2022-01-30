@@ -11,8 +11,8 @@ export class GroupService {
 
   constructor(private http: HttpClient, private apollo: Apollo, private spinner: NgxSpinnerService) { }
 
+  //
   removeMember(groupId: string, username: string) {
-    
     this.spinner.show();
     return this.apollo
       .mutate<any>({

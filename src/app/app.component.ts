@@ -13,11 +13,13 @@ export class AppComponent {
       localStorage.clear();
   }
 
-  title = 'working-title-LFG';
+  title = 'LFG';
   constructor(
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer
   ) {
+
+    //dodanie ikon SVG
     this.matIconRegistry.addSvgIcon(
       'home',
       this.domSanitizer.bypassSecurityTrustResourceUrl(
@@ -55,6 +57,6 @@ export class AppComponent {
       )
     );
 
-    
+    localStorage.clear();
   }
 }

@@ -13,10 +13,10 @@ class Token {
   providedIn: 'root',
 })
 export class AuthService {
-  constructor( private apollo: Apollo, private spinner: NgxSpinnerService) {}
+  constructor(private apollo: Apollo, private spinner: NgxSpinnerService) {}
 
+  //wysyłanie zapytania z informacjami do logowania
   login(username, password) {
-    
     this.spinner.show();
     return this.apollo
       .mutate<any>({
@@ -36,18 +36,18 @@ export class AuthService {
       .pipe(
         map((res) => {
           let { data } = res;
-          if(data.login.user.username !== username) throw new Error("error"); else{
-          localStorage.setItem('currentUser', username);
-          localStorage.setItem('userId',data.login.user.id)
-          localStorage.setItem('token', data.login.token);
-          localStorage.setItem('email', data.login.user.email);
-        }
+          if (data.login.user.username !== username) throw new Error('error');
+          else {
+            localStorage.setItem('currentUser', username);
+            localStorage.setItem('userId', data.login.user.id);
+            localStorage.setItem('token', data.login.token);
+            localStorage.setItem('email', data.login.user.email);
+          }
         })
       );
   }
-
+  //wysyłanie zapytania z informacjami do rejestracji
   signup(username, email, password) {
-    
     this.spinner.show();
     return this.apollo
       .mutate<any>({
@@ -60,8 +60,7 @@ export class AuthService {
       .pipe(
         map((res) => {
           let { data } = res;
-        }
-        )
+        })
       );
   }
 

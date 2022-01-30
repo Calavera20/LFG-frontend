@@ -17,7 +17,6 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.gamesService.getAllGameCards().subscribe(
       (data) => {
-        console.log(data)
         this.gameCards=data;
         this.spinner.hide();
       },

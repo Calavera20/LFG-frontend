@@ -15,10 +15,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { GroupModule } from './modules/group/group.module';
 import { APOLLO_OPTIONS } from 'apollo-angular';
 import { ApolloClientOptions, InMemoryCache, split } from '@apollo/client/core';
-import {WebSocketLink} from '@apollo/client/link/ws'
+import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from '@apollo/client/utilities';
-import {HttpLink} from 'apollo-angular/http'
-import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { HttpLink } from 'apollo-angular/http';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FriendsManagerModule } from './modules/friends-manager/friends-manager.module';
 import { AuthInterceptorService } from './services/AuthInterceptor/auth-interceptor.service';
 
@@ -29,7 +29,7 @@ import { AuthInterceptorService } from './services/AuthInterceptor/auth-intercep
     PageNotFoundComponent,
     FooterComponent,
     HeaderComponent,
-    SignupComponent
+    SignupComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -40,11 +40,12 @@ import { AuthInterceptorService } from './services/AuthInterceptor/auth-intercep
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    GroupModule
+    GroupModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     {
+      //konfiguracja komunikacja z serwerem graphQL
       provide: APOLLO_OPTIONS,
       useFactory(httpLink: HttpLink): ApolloClientOptions<any> {
         const http = httpLink.create({
@@ -58,19 +59,20 @@ import { AuthInterceptorService } from './services/AuthInterceptor/auth-intercep
           },
         });
         const link = split(
-          ({query}) => {
+          ({ query }) => {
             const data = getMainDefinition(query);
             return (
-              data.kind === 'OperationDefinition' && data.operation === 'subscription'
+              data.kind === 'OperationDefinition' &&
+              data.operation === 'subscription'
             );
           },
           ws,
-          http,
+          http
         );
 
         return {
           link: link,
-          cache: new InMemoryCache()
+          cache: new InMemoryCache(),
         };
       },
       deps: [HttpLink],
@@ -78,8 +80,8 @@ import { AuthInterceptorService } from './services/AuthInterceptor/auth-intercep
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
-      multi: true
-    }
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

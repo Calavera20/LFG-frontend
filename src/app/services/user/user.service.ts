@@ -1,26 +1,32 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Apollo, gql  } from 'apollo-angular';
+import { Apollo, gql } from 'apollo-angular';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-  constructor(private http: HttpClient, private apollo: Apollo, private spinner: NgxSpinnerService) {}
+  constructor(
+    private http: HttpClient,
+    private apollo: Apollo,
+    private spinner: NgxSpinnerService
+  ) {}
 
+  //sprawdzenie czy użytkownikowi został nadany token przy logowaniu
   public isUserLoggedIn() {
-    if (localStorage.getItem('currentUser')) {
+    if (localStorage.getItem('token')) {
       return true;
     } else {
       return false;
     }
   }
 
+  //pobieranie listy znajomych na podstawie id użytkownika
   getAllFriendsData(userId: String) {
-      this.spinner.show();  
-      return this.apollo
-        .query<any>({
-          query: gql`
+    this.spinner.show();
+    return this.apollo
+      .query<any>({
+        query: gql`
           query {
             getFriendsList(userId: "${userId}"){
               friends {
@@ -41,19 +47,19 @@ export class UserService {
             }
           }
           `,
+      })
+      .pipe(
+        map((res) => {
+          return res.data.getFriendsList;
         })
-        .pipe(
-          map((res) => {
-            return res.data.getFriendsList;
-          })
-        );
-    }
+      );
+  }
 
-    getUserDataForFriendInviteByUsername(username: String){ 
+  getUserDataForFriendInviteByUsername(username: String) {
     this.spinner.show();
-      return this.apollo
-        .query<any>({
-          query: gql`
+    return this.apollo
+      .query<any>({
+        query: gql`
           query {
             getUserData(username: "${username}"){
               id
@@ -62,33 +68,33 @@ export class UserService {
             }
           }
           `,
+      })
+      .pipe(
+        map((res) => {
+          return res.data.getUserData;
         })
-        .pipe(
-          map((res) => {
-            return res.data.getUserData;
-          })
-        );
-    }
- 
-    inviteFriend(inviteeUsername){
-      
-    this.spinner.show();
-      let userData= {
-        userId: localStorage.getItem('userId'),
-        username: localStorage.getItem('currentUser'),
-        email: localStorage.getItem('email')
-      }
+      );
+  }
 
-      this.getUserDataForFriendInviteByUsername(inviteeUsername).subscribe((data)=>{
-        let invitee= {
+  inviteFriend(inviteeUsername) {
+    this.spinner.show();
+    let userData = {
+      userId: localStorage.getItem('userId'),
+      username: localStorage.getItem('currentUser'),
+      email: localStorage.getItem('email'),
+    };
+
+    this.getUserDataForFriendInviteByUsername(inviteeUsername).subscribe(
+      (data) => {
+        let invitee = {
           userId: data.id,
           username: data.username,
-          email: data.email
-        }
+          email: data.email,
+        };
 
         return this.apollo
-        .mutate<any>({
-          mutation: gql`
+          .mutate<any>({
+            mutation: gql`
             mutation {
               friendInvite(
               userData: {
@@ -103,32 +109,30 @@ export class UserService {
               }) 
             }
           `,
-        })
-        .pipe(
-          map((res) => {
-            this.spinner.hide();
-            return res.data.friendInvite; 
           })
-      ).subscribe();
-      
-    
-    })
-      
-    
-    }
+          .pipe(
+            map((res) => {
+              this.spinner.hide();
+              return res.data.friendInvite;
+            })
+          )
+          .subscribe();
+      }
+    );
+  }
 
-    acceptFriendInvite(inviteeData){
-      let userData= {
-        userId: localStorage.getItem('userId'),
-        username: localStorage.getItem('currentUser'),
-        email: localStorage.getItem('email')
-      }
-      let invitee= {
-        userId: inviteeData.userId,
-        username: inviteeData.username,
-        email: inviteeData.email
-      }
-      
+  acceptFriendInvite(inviteeData) {
+    let userData = {
+      userId: localStorage.getItem('userId'),
+      username: localStorage.getItem('currentUser'),
+      email: localStorage.getItem('email'),
+    };
+    let invitee = {
+      userId: inviteeData.userId,
+      username: inviteeData.username,
+      email: inviteeData.email,
+    };
+
     this.spinner.show();
     return this.apollo
       .mutate<any>({
@@ -154,20 +158,20 @@ export class UserService {
           return res.data.acceptFriendInvite;
         })
       );
-    }
+  }
 
-    sendEmailInvitation(inviteeData, message){
-      let userData= {
-        userId: localStorage.getItem('userId'),
-        username: localStorage.getItem('currentUser'),
-        email: localStorage.getItem('email')
-      }
-      let invitee= {
-        userId: inviteeData.userId,
-        username: inviteeData.username,
-        email: inviteeData.email
-      }
-      return this.apollo
+  sendEmailInvitation(inviteeData, message) {
+    let userData = {
+      userId: localStorage.getItem('userId'),
+      username: localStorage.getItem('currentUser'),
+      email: localStorage.getItem('email'),
+    };
+    let invitee = {
+      userId: inviteeData.userId,
+      username: inviteeData.username,
+      email: inviteeData.email,
+    };
+    return this.apollo
       .mutate<any>({
         mutation: gql`
           mutation {
@@ -193,10 +197,10 @@ export class UserService {
           return res.data.emailInvite;
         })
       );
-    }
+  }
 
-    checkIfUsernameExists(username){
-      return this.apollo
+  checkIfUsernameExists(username) {
+    return this.apollo
       .query<any>({
         query: gql`
           query {
@@ -210,6 +214,5 @@ export class UserService {
           return res.data.checkIfUsernameExists;
         })
       );
-    }
-    
+  }
 }

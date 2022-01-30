@@ -12,11 +12,6 @@
             <mat-icon svgIcon="manage-accounts" class="icon-small"></mat-icon>
           </a>
         </li>
-        <!-- <li class="nav-item" *ngIf="!userService.isUserLoggedIn()">
-          <a class="nav-link waves-effect waves-light" href="login">
-            <mat-icon svgIcon="login" class="icon-small"></mat-icon>
-        </a>
-        </li> -->
         <li class="nav-item dropdown" (click)="logout()" *ngIf="userService.isUserLoggedIn()">
           <a class="nav-link waves-effect waves-light" href="login">
             <mat-icon svgIcon="logout" class="icon-small"></mat-icon>

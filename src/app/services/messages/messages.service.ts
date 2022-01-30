@@ -5,13 +5,16 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MessagesService {
+  constructor(
+    private http: HttpClient,
+    private apollo: Apollo,
+    private spinner: NgxSpinnerService
+  ) {}
 
-
-  constructor(private http: HttpClient, private apollo: Apollo, private spinner: NgxSpinnerService) { }
-
+  //wysyłanie wiadomości
   sendMessage(message: any) {
     return this.apollo
       .mutate<any>({

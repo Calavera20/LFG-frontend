@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
+//serwis z pomocniczymi funkcjami localStorage
 export class StorageService {
 
   constructor() { }

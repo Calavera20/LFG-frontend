@@ -2,17 +2,20 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { map } from 'rxjs/internal/operators/map';
-import { NgxSpinnerService } from "ngx-spinner";
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ListingsService {
+  constructor(
+    private http: HttpClient,
+    private apollo: Apollo,
+    private spinner: NgxSpinnerService
+  ) {}
 
-  constructor(private http: HttpClient, private apollo: Apollo, private spinner: NgxSpinnerService) { }
-
+  //pobieranie listy grup dla danej gry
   getGroupsForGameId(gameId: String) {
-    
     this.spinner.show();
     return this.apollo
       .query<any>({
@@ -39,7 +42,6 @@ export class ListingsService {
       );
   }
   getGroupByGroupId(groupId: String) {
-    
     this.spinner.show();
     return this.apollo
       .query<any>({
@@ -66,7 +68,12 @@ export class ListingsService {
       );
   }
 
-  createGroup(description: String, creator: String, playerLimit: String, gameId: String){
+  createGroup(
+    description: String,
+    creator: String,
+    playerLimit: String,
+    gameId: String
+  ) {
     this.spinner.show();
     return this.apollo
       .mutate<any>({

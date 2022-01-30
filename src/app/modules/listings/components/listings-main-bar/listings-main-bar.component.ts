@@ -12,25 +12,23 @@ import { ListingCreatorComponent } from '../listing-creator/listing-creator.comp
 export class ListingsMainBarComponent implements OnInit {
   constructor(private modalService: NgbModal) {}
 
-  @Output() 
+  @Output()
   filterEvent = new EventEmitter<string>();
-  
+
   ngOnInit(): void {}
 
   description = new FormControl('', [Validators.maxLength(40)]);
-  // creator = new FormControl('', [Validators.maxLength(40)]);
 
   open() {
-    const modalRef = this.modalService.open(ListingCreatorComponent,{
-      centered: true, size: 'lg'
+    const modalRef = this.modalService.open(ListingCreatorComponent, {
+      centered: true,
+      size: 'lg',
     });
     modalRef.componentInstance.name = 'Creator';
   }
 
-  filter(){
+  filter() {
     let value = this.description.value;
-    console.log(value)
     this.filterEvent.emit(value);
-    
   }
 }

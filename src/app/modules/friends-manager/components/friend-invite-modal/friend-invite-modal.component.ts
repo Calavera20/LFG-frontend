@@ -8,37 +8,34 @@ import { UserService } from 'src/app/services/user/user.service';
 @Component({
   selector: 'app-friend-invite-modal',
   templateUrl: './friend-invite-modal.component.html',
-  styleUrls: ['./friend-invite-modal.component.css']
+  styleUrls: ['./friend-invite-modal.component.css'],
 })
 export class FriendInviteModalComponent implements OnInit {
-
   @Input() fromParent;
   message = new FormControl('', [Validators.required]);
-  
-  constructor(private activatedRoute: ActivatedRoute,
+
+  constructor(
+    private activatedRoute: ActivatedRoute,
     public activeModal: NgbActiveModal,
     private spinner: NgxSpinnerService,
     private router: Router,
-    private userService: UserService) {}
+    private userService: UserService
+  ) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  submit() {
+    this.spinner.show();
+    this.userService
+      .sendEmailInvitation(this.fromParent.friendData, this.message.value)
+      .subscribe(
+        (data) => {
+          this.spinner.hide();
+        },
+        (err) => {
+          this.spinner.hide();
+          console.log(err);
+        }
+      );
   }
-
-    submit(){
-      this.spinner.show();
-        this.userService.sendEmailInvitation(this.fromParent.friendData, this.message.value).subscribe(
-          (data) => {
-            this.spinner.hide();
-            console.log(data)
-    
-          },
-          (err) => {
-            this.spinner.hide();
-            console.log(err)
-          }
-        );
-
-
-    }
-
 }

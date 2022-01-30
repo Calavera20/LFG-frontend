@@ -10,11 +10,8 @@ import { JoiningGroupComponent } from '../joining-group/joining-group.component'
 })
 export class ListingCardComponent implements OnInit {
 
-  //TODO socket integration
-
   @Input()
   groupData: any;
-
 
   isWaiting: boolean;
 
@@ -24,31 +21,28 @@ export class ListingCardComponent implements OnInit {
 
   elapsedTime: number;
 
-  constructor(private router:Router,
-    private modalService: NgbModal) {}
+  constructor(private router: Router, private modalService: NgbModal) {}
 
   ngOnInit(): void {
-    console.log(this.groupData)
-    this.calculateElapsedTime(this.groupData.creationDate)
+    this.calculateElapsedTime(this.groupData.creationDate);
   }
 
-  calculateElapsedTime(time: number){
+  calculateElapsedTime(time: number) {
     let timeDiff = Date.now() - time;
-    this.elapsedTime = Math.trunc(timeDiff/60000);
+    this.elapsedTime = Math.trunc(timeDiff / 60000);
   }
 
+  onClick() {
+    const modalRef = this.modalService.open(JoiningGroupComponent, {
+      centered: true,
+      size: 'lg',
+    });
+    modalRef.componentInstance.name = 'Joining Group';
+    let data = {
+      groupId: this.groupData.id,
+      members: this.groupData.members,
+    };
 
-  onClick(){
-    
-      const modalRef = this.modalService.open(JoiningGroupComponent,{
-        centered: true, size: 'lg'
-      });
-      modalRef.componentInstance.name = 'Joining Group';
-      let data = {
-        groupId: this.groupData.id,
-        members: this.groupData.members
-      }
-      
-      modalRef.componentInstance.fromParent = data;
+    modalRef.componentInstance.fromParent = data;
   }
 }

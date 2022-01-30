@@ -21,7 +21,7 @@ export class LogInComponent implements OnInit {
 
   getErrorMessage() {
     if (this.usernameFormControl.hasError('required')) {
-      console.log("błąd")
+
       return 'You must enter a value';
     }
 

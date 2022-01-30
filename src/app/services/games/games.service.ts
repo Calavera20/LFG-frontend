@@ -8,8 +8,13 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class GamesService {
-  constructor(private http: HttpClient, private apollo: Apollo, private spinner: NgxSpinnerService) {}
+  constructor(
+    private http: HttpClient,
+    private apollo: Apollo,
+    private spinner: NgxSpinnerService
+  ) {}
 
+  //wysyłanie zapytania o informacje o wszystkich kartach gier
   getAllGameCards() {
     this.spinner.show();
     return this.apollo

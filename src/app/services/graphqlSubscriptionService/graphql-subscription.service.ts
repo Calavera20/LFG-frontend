@@ -3,15 +3,14 @@ import { Apollo, gql } from 'apollo-angular';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GraphqlSubscriptionService {
-
   private query: any;
 
   constructor(private apollo: Apollo) {}
-
-  getData(chatId: String): Observable<any> {
+  //nawiązanie komunikacji wss dotyczącej wiadomości czatu tekstowego
+  subscribeToMessages(chatId: String): Observable<any> {
     this.query = gql`
     subscription{
       messageAdded(channelId: "${chatId}"){
@@ -24,10 +23,10 @@ export class GraphqlSubscriptionService {
 
     return this.apollo.subscribe({
       query: this.query,
-      fetchPolicy: 'no-cache'
+      fetchPolicy: 'no-cache',
     });
   }
-
+  //nawiązanie komunikacji wss dotyczącej próśb o dołączenie
   subscribeToRequests(groupId: String): Observable<any> {
     this.query = gql`
     subscription{
@@ -40,9 +39,11 @@ export class GraphqlSubscriptionService {
 
     return this.apollo.subscribe({
       query: this.query,
-      fetchPolicy: 'no-cache'
+      fetchPolicy: 'no-cache',
     });
   }
+
+  //nawiązanie komunikacji wss dotyczącej zmiany zezwoleń grup
   subscribeToPermission(groupId: String): Observable<any> {
     this.query = gql`
     subscription{
@@ -55,7 +56,7 @@ export class GraphqlSubscriptionService {
 
     return this.apollo.subscribe({
       query: this.query,
-      fetchPolicy: 'no-cache'
+      fetchPolicy: 'no-cache',
     });
   }
 }

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common'
+import { Location } from '@angular/common';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -12,10 +12,9 @@ import { ListingsService } from 'src/app/services/listings/listings.service';
 @Component({
   selector: 'app-group',
   templateUrl: './group.component.html',
-  styleUrls: ['./group.component.css']
+  styleUrls: ['./group.component.css'],
 })
 export class GroupComponent implements OnInit {
-
   @Input()
   groupId: string;
   groupIdParameter: String;
@@ -26,85 +25,94 @@ export class GroupComponent implements OnInit {
   permission: Observable<any>;
   requests: Observable<any>;
 
-  constructor(private activatedRoute: ActivatedRoute,
+  constructor(
+    private activatedRoute: ActivatedRoute,
     private listingsService: ListingsService,
     private spinner: NgxSpinnerService,
     private gqlSubscriptionsService: GraphqlSubscriptionService,
-    private router:Router,
+    private router: Router,
     private groupService: GroupService,
-    private location: Location) {
-      
-    this.activatedRoute.queryParams.subscribe(params => {
+    private location: Location
+  ) {
+    this.activatedRoute.queryParams.subscribe((params) => {
       this.groupIdParameter = params['groupId'];
-
-    }) }
+    });
+  }
 
   ngOnInit(): void {
-    
     this.getGroupData();
     this.setupPermission();
   }
 
-  checkMembership(){
+  checkMembership() {
     //getCurrentMembers
-    if(!this.group.members.includes(localStorage.getItem("currentUser"))){
-      this.location.back()
+    if (!this.group.members.includes(localStorage.getItem('currentUser'))) {
+      this.location.back();
     }
-    if(this.group.creator==localStorage.getItem("currentUser")){
+    if (this.group.creator == localStorage.getItem('currentUser')) {
       this.subscribeToRequests();
-  }
+    }
   }
 
-  getGroupData(){
+  getGroupData() {
     this.listingsService.getGroupByGroupId(this.groupIdParameter).subscribe(
       (data) => {
-      this.group = data;
-      
-      this.checkMembership();
-      this.isCreator=this.group.creator===localStorage.getItem("currentUser")
-      this.spinner.hide();
+        this.group = data;
+
+        this.checkMembership();
+        this.isCreator =
+          this.group.creator === localStorage.getItem('currentUser');
+        this.spinner.hide();
       },
       (err) => {
-        console.log(err)   
-      this.spinner.hide();
+        console.log(err);
+        this.spinner.hide();
       }
     );
   }
-  subscribeToRequests(){
-    this.requests = this.gqlSubscriptionsService.subscribeToRequests(this.group.id).pipe(map(({ data }) => data.requestAdded))
-    this.requests.subscribe(data => {
-      console.log(data)
-      if(data.data.includes("join request")){
+  subscribeToRequests() {
+    this.requests = this.gqlSubscriptionsService
+      .subscribeToRequests(this.group.id)
+      .pipe(map(({ data }) => data.requestAdded));
+    this.requests.subscribe((data) => {
+      if (data.data.includes('join request')) {
         let requestUsername = data.data.substr(13);
         this.requestUsernames.push(requestUsername);
       }
-    })
+    });
   }
 
-  deleteGroup(){
-    this.groupService.removeGroup(this.group.id).subscribe(()=> this.router.navigate(['dashboard']));
+  deleteGroup() {
+    this.groupService
+      .removeGroup(this.group.id)
+      .subscribe(() => this.router.navigate(['dashboard']));
   }
 
-  setupPermission(){
-    this.permission = this.gqlSubscriptionsService.subscribeToPermission(this.groupIdParameter).pipe(map(({ data }) => data.groupPermissionChanged))
-    this.permission.subscribe(data => {
-
-      let removalMessage= "remove "+localStorage.getItem("currentUser") 
-      if(data.change == removalMessage){
-        this.router.navigate(['dashboard'])
+  setupPermission() {
+    this.permission = this.gqlSubscriptionsService
+      .subscribeToPermission(this.groupIdParameter)
+      .pipe(map(({ data }) => data.groupPermissionChanged));
+    this.permission.subscribe((data) => {
+      let removalMessage = 'remove ' + localStorage.getItem('currentUser');
+      if (data.change == removalMessage) {
+        this.router.navigate(['dashboard']);
       }
-    })
+    });
   }
 
-  accept(username: String){
-    this.groupService.acceptRequest(this.group.id, username).subscribe(()=> this.getGroupData());
-    this.requestUsernames = this.requestUsernames.filter(username => username !== username);
+  accept(username: String) {
+    this.groupService
+      .acceptRequest(this.group.id, username)
+      .subscribe(() => this.getGroupData());
+    this.requestUsernames = this.requestUsernames.filter(
+      (username) => username !== username
+    );
   }
 
-  decline(username: String){
+  decline(username: String) {
     this.groupService.declineRequest(this.group.id, username).subscribe();
-    this.requestUsernames = this.requestUsernames.filter(username => username !== username);
+    this.requestUsernames = this.requestUsernames.filter(
+      (username) => username !== username
+    );
   }
-
-
 }

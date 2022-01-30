@@ -7,65 +7,44 @@ import { FriendInviteModalComponent } from '../friend-invite-modal/friend-invite
 @Component({
   selector: 'app-friend-card',
   templateUrl: './friend-card.component.html',
-  styleUrls: ['./friend-card.component.css']
+  styleUrls: ['./friend-card.component.css'],
 })
 export class FriendCardComponent implements OnInit {
-
   @Input()
   buttonType: any;
 
   @Input()
   friendData: any;
-  constructor( private userService: UserService, private spinner: NgxSpinnerService,
-    private modalService: NgbModal) { }
+  constructor(
+    private userService: UserService,
+    private spinner: NgxSpinnerService,
+    private modalService: NgbModal
+  ) {}
 
-  ngOnInit(): void {
-    console.log(this.friendData)
-  }
+  ngOnInit(): void {}
 
-  // invite(){
-  //   this.spinner.show();
-  //   this.userService.sendEmailInvitation(this.friendData).subscribe(
-  //     (data) => {
-  //       this.spinner.hide();
-  //       console.log(data)
-
-  //     },
-  //     (err) => {
-  //       this.spinner.hide();
-  //       console.log(err)
-  //     }
-  //   );
-  // }
-
-  accept(){
-    
+  accept() {
     this.userService.acceptFriendInvite(this.friendData).subscribe(
       (data) => {
         this.spinner.hide();
       },
       (err) => {
         this.spinner.hide();
-        console.log(err)
+        console.log(err);
       }
     );
-
- 
   }
 
-  invite(){
-    
-    const modalRef = this.modalService.open(FriendInviteModalComponent,{
-      centered: true, size: 'lg'
+  invite() {
+    const modalRef = this.modalService.open(FriendInviteModalComponent, {
+      centered: true,
+      size: 'lg',
     });
     modalRef.componentInstance.name = 'Friend Invite';
     let data = {
       friendData: this.friendData,
-    }
-    
+    };
+
     modalRef.componentInstance.fromParent = data;
-}
-
-
-
+  }
 }

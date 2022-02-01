@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { GraphqlSubscriptionService } from 'src/app/services/graphqlSubscriptionService/graphql-subscription.service';
 import { MessagesService } from 'src/app/services/messages/messages.service';
 
+//Komponent odpowiadający za czat tekstowy
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',

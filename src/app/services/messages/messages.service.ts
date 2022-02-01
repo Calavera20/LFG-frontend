@@ -4,6 +4,7 @@ import { Apollo, gql } from 'apollo-angular';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { map } from 'rxjs/operators';
 
+//Serwis odpowiadający za wysyłanie zapytań dotyczących wiadomości czatu tekstowego
 @Injectable({
   providedIn: 'root',
 })

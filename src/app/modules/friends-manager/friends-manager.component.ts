@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService, Spinner } from 'ngx-spinner';
 import { UserService } from 'src/app/services/user/user.service';
 
+//Komponent odpowiadający za menedżer znajomych
 @Component({
   selector: 'app-friends-manager',
   templateUrl: './friends-manager.component.html',
@@ -20,7 +21,7 @@ export class FriendsManagerComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getAllFriendsData(this.userId).subscribe(
       (data) => {
-        this.friendsData = data;
+        this.setFriendsData(data);
         this.spinner.hide();
       },
       (err) => {
@@ -28,5 +29,9 @@ export class FriendsManagerComponent implements OnInit {
         this.spinner.hide();
       }
     );
+  }
+
+  setFriendsData(data) {
+    this.friendsData = data;
   }
 }

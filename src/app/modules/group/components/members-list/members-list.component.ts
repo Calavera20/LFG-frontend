@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
+//Komponent odpowiadający za listę członków grupy
 @Component({
   selector: 'app-members-list',
   templateUrl: './members-list.component.html',

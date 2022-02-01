@@ -18,10 +18,13 @@
                       class="login_input"
                       placeholder="Username"
                       name="username"
-                      [formControl]='usernameFormControl'
+                      [formControl]="usernameFormControl"
                       required
                     />
-                    <mat-error *ngIf="usernameFormControl.hasError('required')">
+                    <mat-error
+                      class="mat-error-username-required"
+                      *ngIf="usernameFormControl.hasError('required')"
+                    >
                       Username is <strong>required</strong>
                     </mat-error>
                   </mat-form-field>
@@ -35,13 +38,19 @@
                       type="password"
                       placeholder="Password"
                       name="password"
-                      [formControl]='passwordFormControl'
+                      [formControl]="passwordFormControl"
                       required
                     />
-                    <mat-error *ngIf="passwordFormControl.hasError('required')">
+                    <mat-error
+                      class="mat-error-password-required"
+                      *ngIf="passwordFormControl.hasError('required')"
+                    >
                       Password is <strong>required</strong>
                     </mat-error>
-                    <mat-error *ngIf="passwordFormControl.hasError('minlength')">
+                    <mat-error
+                      class="mat-error-password-too-short"
+                      *ngIf="passwordFormControl.hasError('minlength')"
+                    >
                       Password is <strong>too short</strong>
                     </mat-error>
                   </mat-form-field>
@@ -51,7 +60,9 @@
           </form>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button class="main-button" (click)="submit()">Login</button>
+          <button mat-raised-button class="main-button" (click)="submit()">
+            Login
+          </button>
         </mat-card-actions>
       </mat-card>
     </div>

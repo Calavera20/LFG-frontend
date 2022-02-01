@@ -9,6 +9,7 @@ class Token {
   token: string;
 }
 
+//Serwis odpowiadający za wysyłanie zapytań dotyczących autentykacji
 @Injectable({
   providedIn: 'root',
 })

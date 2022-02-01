@@ -12,6 +12,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
+//Moduł organizujący i łączący w jeden moduły współdzielone 
 @NgModule({
   declarations: [],
   imports: [

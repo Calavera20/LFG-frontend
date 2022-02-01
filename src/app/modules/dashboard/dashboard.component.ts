@@ -8,6 +8,8 @@ import { GamesService } from 'src/app/services/games/games.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
+
+//Komponent odpowiadający za panel główny
 export class DashboardComponent implements OnInit {
   constructor(private gamesService: GamesService,
     private spinner: NgxSpinnerService) {}

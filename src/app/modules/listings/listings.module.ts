@@ -9,6 +9,8 @@ import { ListingsRoutingModule } from './listings-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { JoiningGroupComponent } from './components/joining-group/joining-group.component';
 
+
+//Moduł odpowiadający za listę grup
 @NgModule({
   declarations: [
     ListingsComponent,

@@ -12,6 +12,9 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
+
+//Komponent odpowiadający za formularz rejestracji
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -45,7 +48,10 @@ export class SignupComponent implements OnInit {
   signupForm = this.formBuilder.group(
     {
       usernameFormControl: new FormControl('', [Validators.required]),
-      emailFormControl: new FormControl('', [Validators.required, Validators.email]),
+      emailFormControl: new FormControl('', [
+        Validators.required,
+        Validators.email,
+      ]),
       passwordFormControl: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
@@ -81,7 +87,7 @@ export class SignupComponent implements OnInit {
             this.router.navigate(['login']);
           },
           (err) => {
-            console.log(err)
+            console.log(err);
             this.spinner.hide();
           }
         );

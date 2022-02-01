@@ -9,13 +9,13 @@ import { GraphqlSubscriptionService } from 'src/app/services/graphqlSubscription
 import { GroupService } from 'src/app/services/group/group.service';
 import { ListingsService } from 'src/app/services/listings/listings.service';
 
+//Komponent odpowiadający za okno modalny wyświetlane w trakcie oczekiwania na decyzję o akceptacji prośby o dołączenie do grup
 @Component({
   selector: 'app-joining-group',
   templateUrl: './joining-group.component.html',
-  styleUrls: ['./joining-group.component.css']
+  styleUrls: ['./joining-group.component.css'],
 })
 export class JoiningGroupComponent implements OnInit {
-
   @Input() name;
   @Input() fromParent;
 
@@ -27,42 +27,51 @@ export class JoiningGroupComponent implements OnInit {
     public activeModal: NgbActiveModal,
     private router: Router,
     private gqlSubscriptionService: GraphqlSubscriptionService,
-    private groupService: GroupService) {
-      this.modalText="Join request has been sent, please wait.";
-    }
-
+    private groupService: GroupService
+  ) {
+    this.modalText = 'Join request has been sent, please wait.';
+  }
 
   ngOnInit(): void {
     this.checkMembership();
   }
 
-  checkMembership(){
-    if(this.fromParent.members.includes(localStorage.getItem("currentUser"))){
+  checkMembership() {
+    if (this.fromParent.members.includes(localStorage.getItem('currentUser'))) {
       this.navigateToGroup();
-    }else{
+    } else {
       this.subscribeToJoinRequest();
     }
   }
 
-  subscribeToJoinRequest(){
-    this.gqlSubscriptionService.subscribeToRequests(this.fromParent.groupId).subscribe(data =>{
-      data=data.data.requestAdded.data
-      if(data.includes("accept")){
-        let username = data.substr(7);
-        if(username == localStorage.getItem("currentUser")){
-          this.navigateToGroup();
+  subscribeToJoinRequest() {
+    this.gqlSubscriptionService
+      .subscribeToRequests(this.fromParent.groupId)
+      .subscribe((data) => {
+        data = data.data.requestAdded.data;
+        if (data.includes('accept')) {
+          let username = data.substr(7);
+          if (username == localStorage.getItem('currentUser')) {
+            this.navigateToGroup();
+          }
+        } else {
+          let username = data.substr(17);
+          if (username == localStorage.getItem('currentUser')) {
+            this.modalText = 'request declined';
+          }
         }
-      }else{
-        let username = data.substr(17);
-        if(username == localStorage.getItem("currentUser")){
-          this.modalText="request declined";
-        }
-      }})
-   this.groupService.sendJoinRequest(this.fromParent.groupId,localStorage.getItem("currentUser")).subscribe();
-  
+      });
+    this.groupService
+      .sendJoinRequest(
+        this.fromParent.groupId,
+        localStorage.getItem('currentUser')
+      )
+      .subscribe();
   }
-  navigateToGroup(){
+  navigateToGroup() {
     this.activeModal.dismiss();
-    this.router.navigate(["group"],{queryParams: {groupId: this.fromParent.groupId}})
+    this.router.navigate(['group'], {
+      queryParams: { groupId: this.fromParent.groupId },
+    });
   }
 }

@@ -4,6 +4,7 @@ import { Apollo, gql } from 'apollo-angular';
 import { map } from 'rxjs/internal/operators/map';
 import { NgxSpinnerService } from 'ngx-spinner';
 
+//Serwis odpowiadający za wysyłanie zapytań dotyczących listy grup
 @Injectable({
   providedIn: 'root',
 })

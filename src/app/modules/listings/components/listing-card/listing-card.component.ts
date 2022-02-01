@@ -3,13 +3,13 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { JoiningGroupComponent } from '../joining-group/joining-group.component';
 
+//Komponent odpowiadający za pojedyńczy element grupy na liście grup
 @Component({
   selector: 'app-listing-card',
   templateUrl: './listing-card.component.html',
   styleUrls: ['./listing-card.component.css'],
 })
 export class ListingCardComponent implements OnInit {
-
   @Input()
   groupData: any;
 

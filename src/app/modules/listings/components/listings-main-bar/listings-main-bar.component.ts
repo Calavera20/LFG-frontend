@@ -4,6 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ListingCreatorComponent } from '../listing-creator/listing-creator.component';
 
+
+//Komponent odpowiadający za formularz filtrowania listy grup
 @Component({
   selector: 'app-listings-main-bar',
   templateUrl: './listings-main-bar.component.html',

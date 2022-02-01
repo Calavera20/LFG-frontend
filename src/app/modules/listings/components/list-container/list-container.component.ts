@@ -4,6 +4,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import Group from 'src/app/models/group.model';
 import { ListingsService } from 'src/app/services/listings/listings.service';
 
+//Komponent odpowiadający za pobieranie i wyświetlanie grup na liście grup
 @Component({
   selector: 'app-list-container',
   templateUrl: './list-container.component.html',

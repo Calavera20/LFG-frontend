@@ -4,6 +4,7 @@ import { NgxSpinner, NgxSpinnerService } from 'ngx-spinner';
 import { UserService } from 'src/app/services/user/user.service';
 import { FriendInviteModalComponent } from '../friend-invite-modal/friend-invite-modal.component';
 
+//Komponent odpowiadający za kartę znajomego w menedżerze znajomych
 @Component({
   selector: 'app-friend-card',
   templateUrl: './friend-card.component.html',

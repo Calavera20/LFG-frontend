@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+//Komponent odpowiadający karty gier na panelu głownym
 @Component({
   selector: 'app-game-card',
   templateUrl: './game-card.component.html',

@@ -7,6 +7,7 @@ import { MembersListComponent } from './components/members-list/members-list.com
 import { MemberCardComponent } from './components/member-card/member-card.component';
 import { MessageComponent } from './components/message/message/message.component';
 
+//Moduł odpowiadający za okno grupy
 @NgModule({
   declarations: [
     GroupComponent,

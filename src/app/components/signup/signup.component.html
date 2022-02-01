@@ -22,7 +22,7 @@
                       formControlName="usernameFormControl"
                     />
                   </mat-form-field>
-                  <mat-error
+                  <mat-error class="mat-error-username-required"
                     *ngIf="
                       signupForm.controls.usernameFormControl.hasError(
                         'required'
@@ -46,7 +46,7 @@
                       formControlName="emailFormControl"
                     />
                   </mat-form-field>
-                  <mat-error
+                  <mat-error class="mat-error-email-required"
                     *ngIf="
                       signupForm.controls.emailFormControl.hasError(
                         'required'
@@ -55,7 +55,7 @@
                   >
                     Email is <strong>required</strong>
                   </mat-error>
-                  <mat-error
+                  <mat-error class="mat-error-username-wrong-format"
                   *ngIf="
                     signupForm.controls.emailFormControl.hasError(
                       'email'
@@ -80,7 +80,7 @@
                       autocomplete="new-password"
                     />
                   </mat-form-field>
-                  <mat-error
+                  <mat-error class="mat-error-password-required"
                     *ngIf="
                       signupForm.controls.passwordFormControl.hasError(
                         'required'
@@ -89,7 +89,7 @@
                   >
                     Password is <strong>required</strong>
                   </mat-error>
-                  <mat-error
+                  <mat-error class="mat-error-password-too-short"
                     *ngIf="
                       signupForm.controls.passwordFormControl.hasError(
                         'minlength'
@@ -111,7 +111,7 @@
                       required
                       formControlName="passwordConfirmationFormControl"
                     /> </mat-form-field
-                  ><mat-error
+                  ><mat-error class="mat-error-password-confirmation-required"
                     *ngIf="
                       signupForm.controls.passwordConfirmationFormControl.hasError(
                         'required'
@@ -122,7 +122,7 @@
                   >
                     Password confirmation is <strong>required</strong>
                   </mat-error>
-                  <mat-error
+                  <mat-error class="mat-error-password-confirmation-too-short"
                     *ngIf="
                       signupForm.controls.passwordConfirmationFormControl.hasError(
                         'minlength'
@@ -133,7 +133,7 @@
                   >
                     Password confirmation is <strong>too short</strong>
                   </mat-error>
-                  <mat-error
+                  <mat-error class="mat-error-password-no-match"
                     *ngIf="
                       signupForm.controls.passwordConfirmationFormControl.hasError(
                         'matcherValidator'

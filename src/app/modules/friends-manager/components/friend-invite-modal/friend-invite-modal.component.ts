@@ -5,6 +5,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { UserService } from 'src/app/services/user/user.service';
 
+//Komponent odpowiadający za okno modalne używane do wysyłania zaproszenia email
 @Component({
   selector: 'app-friend-invite-modal',
   templateUrl: './friend-invite-modal.component.html',

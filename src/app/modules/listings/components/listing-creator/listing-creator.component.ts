@@ -4,7 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ListingsService } from 'src/app/services/listings/listings.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { isEmpty } from 'rxjs/operators';
+
+
+//Komponent odpowiadający za okno modalne kreatora grup
 @Component({
   selector: 'app-listing-creator',
   templateUrl: './listing-creator.component.html',

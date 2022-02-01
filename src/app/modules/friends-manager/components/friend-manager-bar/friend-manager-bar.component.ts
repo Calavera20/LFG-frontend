@@ -2,14 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user/user.service';
 
-
+//Komponent odpowiadający za formularz do wysyłania zaproszenia do listy znajomych
 @Component({
   selector: 'app-friend-manager-bar',
   templateUrl: './friend-manager-bar.component.html',
-  styleUrls: ['./friend-manager-bar.component.css']
+  styleUrls: ['./friend-manager-bar.component.css'],
 })
 export class FriendManagerBarComponent implements OnInit {
-
   constructor(private userService: UserService) {}
 
   findError: boolean = false;
@@ -18,18 +17,21 @@ export class FriendManagerBarComponent implements OnInit {
 
   username = new FormControl('', [Validators.maxLength(40)]);
 
-  checkUsername(username){
-    this.userService.checkIfUsernameExists(username).subscribe((data)=>{
-
-      if(data==null){
-        this.findError=true
+  checkUsername(username) {
+    this.userService.checkIfUsernameExists(username).subscribe((data) => {
+      if (data == null) {
+        this.findError = true;
       }
-    })
+    });
   }
 
-  addFriend(){
+  addFriend() {
     let value = this.username.value;
-    this.checkUsername(value);
-    this.userService.inviteFriend(value);
+    if (value) {
+      this.checkUsername(value);
+      this.userService.inviteFriend(value);
+    } else {
+      this.findError = true;
+    }
   }
 }

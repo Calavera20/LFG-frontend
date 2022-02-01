@@ -7,7 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 import { FriendInviteModalComponent } from './components/friend-invite-modal/friend-invite-modal.component';
 
 
-
+//Moduł odpowiadający za menedżer znajomych
 @NgModule({
   declarations: [
     FriendsManagerComponent,

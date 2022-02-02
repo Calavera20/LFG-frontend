@@ -2,6 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 
+//Główny komponent będący korzeniem aplikacji
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
@@ -56,7 +57,5 @@ export class AppComponent {
         '../assets/svg/refresh.svg'
       )
     );
-
-    localStorage.clear();
   }
 }

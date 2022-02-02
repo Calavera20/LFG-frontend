@@ -8,7 +8,7 @@ import { FriendsManagerComponent } from './modules/friends-manager/friends-manag
 import { GroupComponent } from './modules/group/group.component';
 import { AuthGuardService } from './services/authGuard/auth-guard.service';
 
-
+//ścieżki routingu aplikacji
 const routes: Routes = [
   {
     path: '',
